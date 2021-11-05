@@ -1,4 +1,13 @@
+DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS prepositions;
+
+CREATE TABLE users (
+    id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    username VARCHAR(30) NOT NULL UNIQUE,
+    password VARCHAR(200),
+    email VARCHAR(500),
+    type VARCHAR(10)
+);
 
  
 CREATE TABLE prepositions ( 
@@ -9,6 +18,10 @@ CREATE TABLE prepositions (
     answer VARCHAR(10),
     explanation VARCHAR(500)
 ); 
+
+INSERT INTO users (username, password, email, type)
+    VALUES ('Rebecca', '12345678', 'rebecca@codeop.com', 'teacher'),
+           ('needEnglish', '87654321', 'needenglish@gmail.com', 'student');
  
 INSERT INTO prepositions (seq, sentence, options, answer, explanation)  
     VALUES (1, 'There was once a woman who came <menu> Barcelona.', 'in, to, at', 'to','TO: PREPOSITION OF DIRECTION: To signifies orientation toward a goal.'),

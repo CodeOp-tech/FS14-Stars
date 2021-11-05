@@ -24,7 +24,7 @@ con.connect(function(err) {
 
   con.query(sql, function(err, result) {
     if (err) throw err;
-    console.log("Table creation `prepositions` was successful!");
+    console.log("Table creation was successful!");
 
     console.log("Closing...");
   });
