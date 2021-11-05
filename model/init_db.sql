@@ -1,4 +1,5 @@
-DROP TABLE IF EXISTS prepositions; 
+DROP TABLE IF EXISTS prepositions;
+
  
 CREATE TABLE prepositions ( 
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, 
