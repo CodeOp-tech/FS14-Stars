@@ -1,6 +1,6 @@
-DROP TABLE IF EXISTS exercise; 
+DROP TABLE IF EXISTS prepositions; 
  
-CREATE TABLE exercise ( 
+CREATE TABLE prepositions ( 
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, 
     seq INT,
     sentence VARCHAR(5000), 
@@ -9,7 +9,7 @@ CREATE TABLE exercise (
     explanation VARCHAR(500)
 ); 
  
-INSERT INTO exercise (seq, sentence, options, answer, explanation)  
+INSERT INTO prepositions (seq, sentence, options, answer, explanation)  
     VALUES (1, 'There was once a woman who came <menu> Barcelona.', 'in, to, at', 'to','TO: PREPOSITION OF DIRECTION: To signifies orientation toward a goal.'),
            (2, 'No one knew where she came <menu>.', 'in, at, from', 'from', 'FROM: PREPOSITION OF DIRECTION: From refers to the starting point of departure or origin of an abject.'),
            (3, 'With her designer clothes and poise, people thought she came <menu> money.', 'at, from, of', 'from', 'TO COME FROM MONEY: to come from a rich family'),
