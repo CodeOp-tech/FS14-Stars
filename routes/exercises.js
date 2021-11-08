@@ -42,6 +42,7 @@ function joinToJson(results) {
   if (row0.itemId) {
       items = results.data.map(i => ({
           id: i.itemId,
+          seq: i.sequence,
           sentence: i.sentence,
           options: i.options,
           answer: i.answer,
@@ -117,24 +118,7 @@ router.post('/', async function(req, res) {
   }
 });
 
-// ADD (POST) NEW ITEMS TO EXISTING EXERCISE
 
-  
-  // router.post('/', async function(req,res,next){
-  //   let { seq, sentence, options, answer, explanation } = req.body;
-  
-  //   try{
-  //     let sql = 
-  //       `INSERT INTO prepositions (seq, sentence, options, answer, explanation)  
-  //       VALUES ("${seq}", "${sentence}", "${options}", "${answer}", "${explanation}");`;
-  //     await db(sql);
-  //     let results = await db("SELECT * FROM items ORDER BY seq;");
-  //     res.send(results.data);
-  //   } catch(err) {
-  //     res.status(500).send({ error: err.message});
-  //   }  
-  // });
-  
-  
+
   module.exports = router;
   
