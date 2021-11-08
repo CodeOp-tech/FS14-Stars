@@ -2,7 +2,8 @@ var express = require('express');
 var router = express.Router();
 const db = require("../model/helper");
 
-// localhost:5000/users
+// http://localhost:5000/users 
+// feth from /users
 
 router.get('/', async function(req, res, next){
   try{
@@ -12,6 +13,9 @@ router.get('/', async function(req, res, next){
     res.status(500).send({ error: "Sorry. We are encountering technical difficulties."});
   }  
 });
+
+// adds username, password, email, type in the table
+// password unhashed
 
 router.post('/', async function(req,res,next){
   let { username, password, email, type } = req.body;
