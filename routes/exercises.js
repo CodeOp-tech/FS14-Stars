@@ -98,21 +98,42 @@ router.get('/:id', ensureExerciseExists, async function(req, res) {
   }
 });
 
-  
-  router.post('/', async function(req,res,next){
-    let { seq, sentence, options, answer, explanation } = req.body;
-  
-    try{
-      let sql = 
-        `INSERT INTO prepositions (seq, sentence, options, answer, explanation)  
-        VALUES ("${seq}", "${sentence}", "${options}", "${answer}", "${explanation}");`;
+// POST a new exercise
+router.post('/', async function(req, res) {
+  let { category, title } = req.body;
+  let sql = `
+      INSERT INTO exercises (category, title)
+      VALUES ('${ category }', '${ title }')
+  `;
+
+  try {
+      // Insert the new exercise
       await db(sql);
-      let results = await db("SELECT * FROM items ORDER BY seq;");
-      res.send(results.data);
-    } catch(err) {
-      res.status(500).send({ error: err.message});
-    }  
-  });
+      // Set status code for "resource created" and return all exercises      
+      res.status(201);
+      sendAllExercises(res);
+  } catch (err) {
+      res.status(500).send({ error: err.message });  
+  }
+});
+
+// ADD (POST) NEW ITEMS TO EXISTING EXERCISE
+
+  
+  // router.post('/', async function(req,res,next){
+  //   let { seq, sentence, options, answer, explanation } = req.body;
+  
+  //   try{
+  //     let sql = 
+  //       `INSERT INTO prepositions (seq, sentence, options, answer, explanation)  
+  //       VALUES ("${seq}", "${sentence}", "${options}", "${answer}", "${explanation}");`;
+  //     await db(sql);
+  //     let results = await db("SELECT * FROM items ORDER BY seq;");
+  //     res.send(results.data);
+  //   } catch(err) {
+  //     res.status(500).send({ error: err.message});
+  //   }  
+  // });
   
   
   module.exports = router;
