@@ -98,8 +98,6 @@ router.get('/:id', ensureExerciseExists, async function(req, res) {
   }
 });
 
-
-
   
   router.post('/', async function(req,res,next){
     let { seq, sentence, options, answer, explanation } = req.body;
