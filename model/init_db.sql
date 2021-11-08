@@ -25,18 +25,20 @@ CREATE TABLE items (
     options VARCHAR(500),
     answer VARCHAR(500),
     explanation VARCHAR(5000),
-    exercise_id INT NOT NULL,
-    FOREIGN KEY (exercise_id) REFERENCES exercises(id) ON DELETE CASCADE
+    exerciseID INT NOT NULL,
+    FOREIGN KEY (exerciseID) REFERENCES exercises(id) ON DELETE CASCADE
 ); 
+
 
 INSERT INTO users (username, password, email, type)
     VALUES ('Rebecca', '12345678', 'rebecca@teachme.com', 'teacher'),
            ('needEnglish', '87654321', 'needenglish@gmail.com', 'student');
 
 INSERT INTO exercises (category, title) 
-    VALUES ('prepositions', 'Mixed Prepositions Exercise');
+    VALUES ('prepositions', 'Mixed Prepositions Exercise'),
+           ('adjectives', 'Adjectives of Quantity');
  
-INSERT INTO items (seq, sentence, options, answer, explanation, exercise_id)  
+INSERT INTO items (seq, sentence, options, answer, explanation, exerciseID)  
     VALUES (1, 'There was once a woman who came <menu> Barcelona.', 'in, to, at', 'to','TO: PREPOSITION OF DIRECTION: To signifies orientation toward a goal.', 1),
            (2, 'No one knew where she came <menu>.', 'in, at, from', 'from', 'FROM: PREPOSITION OF DIRECTION: From refers to the starting point of departure or origin of an abject.', 1),
            (3, 'With her designer clothes and poise, people thought she came <menu> money.', 'at, from, of', 'from', 'TO COME FROM MONEY: to come from a rich family', 1),
@@ -50,6 +52,11 @@ INSERT INTO items (seq, sentence, options, answer, explanation, exercise_id)
            (11, 'When he finally came <menu>,', 'with, to, from', 'to', 'TO COME TO: PHRASAL VERB: to regain consciousness.', 1),
            (12, 'he looked for the woman but he found <menu> that she had already gone.', 'out, of, to', 'out', 'TO FIND OUT: PHRASAL VERB: to discover.', 1),
            (13, 'When we looked around, we realized that she had gotten <menu> the vault and had gotten our most expensive items.', 'at, to, into', 'into', 'TO GET INTO: PHRASAL VERB: to gain access to something.', 1),
-           (14, 'We ran out of the shop in a rush and asked <menu> but she had disappeared without a trace.', 'for, around, to', 'around', 'TO ASK AROUND: PHRASAL VERB: to speak to a number of different people in order to try and get some information.', 1);
-      
+           (14, 'We ran out of the shop in a rush and asked <menu> but she had disappeared without a trace.', 'for, around, to', 'around', 'TO ASK AROUND: PHRASAL VERB: to speak to a number of different people in order to try and get some information.', 1),
+           (1, 'I have <menu> time, can you hurry up?', 'little, few', 'little', '', 2),
+           (2, 'I have <menu> money, what can I buy for you?', 'a little, few', 'a little', '', 2),
+           (3, 'Can you give me <menu> minutes?', 'few, a few', 'a few', '', 2),
+           (4, 'I have <menu> money, I cannot afford to go out.', 'a little, little', 'little', '', 2),
+           (5, 'My family and I have <menu> arguments', 'little, few', 'few', '', 2),
+           (6, 'They have <menu> education. He does not know how to write properly.', 'little, a little', 'little', '', 2);
 
