@@ -8,6 +8,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var exercisesRouter = require('./routes/exercises');
 var itemsRouter = require ('./routes/items');
+var teachersRouter = require ('./routes/teachers');
 
 var app = express();
 
@@ -19,14 +20,9 @@ app.use(cookieParser());
 // app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-<<<<<<< HEAD
 app.use('/users', usersRouter);
 app.use('/exercises', exercisesRouter);
 app.use('/items', itemsRouter);
-||||||| parent of b3b03ab (NavBar Setup)
-app.use('/users', usersRouter);
-=======
-app.use('/users', usersRouter)
->>>>>>> b3b03ab (NavBar Setup)
+app.use('/teachers', teachersRouter);
 
 module.exports = app;

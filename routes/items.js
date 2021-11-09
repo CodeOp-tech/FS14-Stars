@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 const db = require("../model/helper");
 
+// http://localhost:5000/items 
+// feth from /items
 
 //GET ALL ITEMS from /items
 router.get('/', async function(req, res, next){
