@@ -15,7 +15,7 @@ router.get('/', async function(req, res, next){
   
 
 
-// ADD (POST) NEW ITEMS TO EXISTING EXERCISE  
+// ADD (POST) NEW ITEMS TO EXISTING EXERCISE, linked by foreign key, exerciseID  
 router.post('/', async function(req,res,next){
     let { seq, sentence, options, answer, explanation, exerciseID } = req.body;
     

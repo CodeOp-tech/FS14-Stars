@@ -1,9 +1,11 @@
+-- deletes table if it already exists
 SET foreign_key_checks = 0;
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS exercises;
 DROP TABLE IF EXISTS items;
 SET foreign_key_checks = 1;
 
+-- creates user table with the following specifications
 CREATE TABLE users (
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     username VARCHAR(30) NOT NULL UNIQUE,
@@ -12,12 +14,14 @@ CREATE TABLE users (
     type VARCHAR(10)
 );
 
+-- creates exercise table, connected to items table below
 CREATE TABLE exercises ( 
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     category VARCHAR(500),
     title VARCHAR(500)
 );
- 
+
+-- creates items table, where exercise items are stored from create exercise form, grouped with foreign key exerciseID 
 CREATE TABLE items ( 
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, 
     seq INT,
@@ -30,14 +34,17 @@ CREATE TABLE items (
 ); 
 
 
+-- initial users table data
 INSERT INTO users (username, password, email, type)
     VALUES ('Rebecca', '12345678', 'rebecca@teachme.com', 'teacher'),
            ('needEnglish', '87654321', 'needenglish@gmail.com', 'student');
 
+-- initial exercises table data
 INSERT INTO exercises (category, title) 
     VALUES ('prepositions', 'Mixed Prepositions Exercise'),
            ('adjectives', 'Adjectives of Quantity');
  
+-- initial items table data, consists of 2 exercises: prepositions and adjectives
 INSERT INTO items (seq, sentence, options, answer, explanation, exerciseID)  
     VALUES (1, 'There was once a woman who came <menu> Barcelona.', 'in, to, at', 'to','TO: PREPOSITION OF DIRECTION: To signifies orientation toward a goal.', 1),
            (2, 'No one knew where she came <menu>.', 'in, at, from', 'from', 'FROM: PREPOSITION OF DIRECTION: From refers to the starting point of departure or origin of an abject.', 1),
