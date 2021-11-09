@@ -1,13 +1,4 @@
-<<<<<<< HEAD
-node_modules/
-.env
-/node_modules
-/dist
-/client/node_modules
-||||||| parent of b3b03ab (NavBar Setup)
-=======
 /node_modules
 /dist
 .env
 /client/node_modules
->>>>>>> b3b03ab (NavBar Setup)
