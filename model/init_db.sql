@@ -51,7 +51,7 @@ INSERT INTO users (username, password, email, type)
            ('Shandy', 'shan0926', 'shandy@teachme.com', 'teacher'),
            ('needEnglish', '87654321', 'needenglish@gmail.com', 'student');
 
--- initial TEACHERS table
+-- initial TEACHERS table, maybe a checkbox with multiple answers for qualification?
 INSERT INTO teachers (qualifications, experience, userID)
     VALUES ('CELTA', 5, 1),
            ('CELTA, PGCEi', 10, 2);
