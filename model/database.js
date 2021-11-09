@@ -11,7 +11,7 @@ const con = mysql.createConnection({
   host: DB_HOST || "127.0.0.1",
   user: DB_USER || "root",
   password: DB_PASS,
-  database: DB_NAME || "prep",
+  database: DB_NAME || "teachme",
   multipleStatements: true
 });
 
@@ -24,7 +24,7 @@ con.connect(function(err) {
 
   con.query(sql, function(err, result) {
     if (err) throw err;
-    console.log("Table creation `prepositions` was successful!");
+    console.log("Table creation was successful!");
 
     console.log("Closing...");
   });
