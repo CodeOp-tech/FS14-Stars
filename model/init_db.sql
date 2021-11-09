@@ -4,6 +4,7 @@ DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS exercises;
 DROP TABLE IF EXISTS items;
 DROP TABLE IF EXISTS teachers;
+DROP TABLE IF EXISTS students;
 SET foreign_key_checks = 1;
 
 -- creates USERS table with the following specifications
@@ -15,11 +16,20 @@ CREATE TABLE users (
     type VARCHAR(10)
 );
 
--- creates TEACHER PROFILE table with the following specifications
+-- creates TEACHERS table with the following specifications
 CREATE TABLE teachers (
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     qualifications VARCHAR(100),
     experience INT,
+    userID INT,
+    FOREIGN KEY (userID) REFERENCES users(id) ON DELETE CASCADE
+);
+
+-- creates STUDENTS table with the following specifications
+CREATE TABLE students (
+    id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    startLevel VARCHAR(100),
+    currentLevel VARCHAR(100),
     userID INT,
     FOREIGN KEY (userID) REFERENCES users(id) ON DELETE CASCADE
 );
@@ -50,11 +60,18 @@ INSERT INTO users (username, password, email, type)
     VALUES ('Rebecca', '12345678', 'rebecca@teachme.com', 'teacher'),
            ('Shandy', 'shan0926', 'shandy@teachme.com', 'teacher'),
            ('needEnglish', '87654321', 'needenglish@gmail.com', 'student');
+           
 
 -- initial TEACHERS table, maybe a checkbox with multiple answers for qualification?
 INSERT INTO teachers (qualifications, experience, userID)
     VALUES ('CELTA', 5, 1),
            ('CELTA, PGCEi', 10, 2);
+
+-- initial STUDENTS table
+INSERT INTO students (startLevel, currentLevel, userID)
+    VALUES ('Beginner', 'Beginner', 3);
+           
+
 
 -- initial EXERCISES table data
 INSERT INTO exercises (category, title, level) 

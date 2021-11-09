@@ -9,6 +9,7 @@ var usersRouter = require('./routes/users');
 var exercisesRouter = require('./routes/exercises');
 var itemsRouter = require ('./routes/items');
 var teachersRouter = require ('./routes/teachers');
+var studentsRouter = require ('./routes/students');
 
 var app = express();
 
@@ -24,5 +25,6 @@ app.use('/users', usersRouter);
 app.use('/exercises', exercisesRouter);
 app.use('/items', itemsRouter);
 app.use('/teachers', teachersRouter);
+app.use('/students', studentsRouter);
 
 module.exports = app;
