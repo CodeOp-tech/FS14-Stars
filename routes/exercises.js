@@ -2,6 +2,9 @@ var express = require('express');
 var router = express.Router();
 const db = require("../model/helper");
 
+// http://localhost:5000/exercises 
+// fetch from /exercises
+
 /**
  * Guards
  **/
@@ -56,6 +59,7 @@ function joinToJson(results) {
       id: row0.exerciseId,
       title: row0.title,
       category: row0.category,
+      level: row0.level,
       items
   };
 
@@ -101,10 +105,10 @@ router.get('/:id', ensureExerciseExists, async function(req, res) {
 
 // POST a new exercise
 router.post('/', async function(req, res) {
-  let { category, title } = req.body;
+  let { category, title, level } = req.body;
   let sql = `
       INSERT INTO exercises (category, title)
-      VALUES ('${ category }', '${ title }')
+      VALUES ('${ category }', '${ title }', ${level} )
   `;
 
   try {

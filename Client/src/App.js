@@ -1,16 +1,20 @@
-import './App.css';
+import { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
+import "./App.css";
+
+
+
+
 
 import Navbar from './components/Navbar';
 // import Routes from './components/Routes';
 
 
 function App() {
-    return (
-        <div className="App">
-      <h1>Educational Platform</h1>
-
-      <Navbar />
-      
+  return (
+    <div className="App">
+      <h1>TeachMe</h1>
+    
     </div>
     )
 }
