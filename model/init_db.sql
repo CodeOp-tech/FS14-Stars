@@ -5,6 +5,7 @@ DROP TABLE IF EXISTS exercises;
 DROP TABLE IF EXISTS items;
 DROP TABLE IF EXISTS teachers;
 DROP TABLE IF EXISTS students;
+DROP TABLE IF EXISTS scores;
 SET foreign_key_checks = 1;
 
 -- creates USERS table with the following specifications
@@ -54,6 +55,16 @@ CREATE TABLE items (
     FOREIGN KEY (exerciseID) REFERENCES exercises(id) ON DELETE CASCADE
 ); 
 
+-- creates SCORES table
+CREATE TABLE scores ( 
+    id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    studentID INT NOT NULL,
+    exerciseID INT NOT NULL,
+    score INT,
+    FOREIGN KEY (studentID) REFERENCES students(id) ON DELETE CASCADE,
+    FOREIGN KEY (exerciseID) REFERENCES exercises(id) ON DELETE CASCADE
+);
+
 
 -- initial USERS table data
 INSERT INTO users (username, password, email, type)
@@ -101,3 +112,6 @@ INSERT INTO items (seq, sentence, options, answer, explanation, exerciseID)
            (5, 'My family and I have <menu> arguments', 'little, few', 'few', '', 2),
            (6, 'They have <menu> education. He does not know how to write properly.', 'little, a little', 'little', '', 2);
 
+-- initial SCORES table
+INSERT INTO scores (studentID, exerciseID, score)
+    VALUES (1, 1, 100);
