@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
-import Form from 'react-bootstrap/Form';
+import React, { useState } from 'react';
+import { Row, Form, Button, Col } from 'react-bootstrap';
 
 
-function SignupForm(props) {
+function SignupForm (props) {
   const[userName, setUsername] = useState('');
 
 function handleChange(event) {
@@ -22,24 +22,24 @@ return (
      <Row className="mb-3">
          <Form.Group className="mb-3" controlId="formGridAddress1">
          <Form.Label>Your Name</Form.Label>
-         <Form.Control placeholder="Insert your name..." />
+         <Form.Control placeholder="Insert your name..."  onChange={handleChange} required/>
          </Form.Group>
 
          <Form.Group as={Col} controlId="formGridEmail">
          <Form.Label>Email</Form.Label>
-         <Form.Control type="email" placeholder="Enter email" />
+         <Form.Control type="email" placeholder="Enter email" onChange={handleChange} required/>
          </Form.Group>
 
          <Form.Group as={Col} controlId="formGridPassword">
          <Form.Label>Password</Form.Label>
-         <Form.Control type="password" placeholder="Password" />
+         <Form.Control type="password" placeholder="Password" onChange={handleChange} required/>
         </Form.Group>
-    </Row>
+      </Row>
  
  
     <Form.Group as={Col} controlId="formGridState">
       <Form.Label>State</Form.Label>
-      <Form.Select defaultValue="I am a...">
+      <Form.Select defaultValue="I am a..." onChange={handleChange} required>
         <option>Teacher</option>
         <option>Student</option>
       </Form.Select>
@@ -54,6 +54,6 @@ return (
             
 </div>
     )
-}
+};
 
 export default SignupForm;
