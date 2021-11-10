@@ -98,23 +98,38 @@ router.get('/:id', ensureStudentExists, async function(req, res) {
   }
 });
 
+// POST a new student
+router.post('/', async function(req, res) {
+  let { username, password, email, type, startLevel, currentLevel } = req.body;
 
+  let sql = `
+      INSERT INTO users (username, password, email, type)
+      VALUES ('${username}', '${password}', '${email}', '${type}');
+      SELECT LAST_INSERT_ID();
+  `;
 
-//POST to /students  
-router.post('/', async function(req,res,next){
-    let { startLevel, currentLevel, userID } = req.body;
-  
-    try{
-      let sql = 
-        `INSERT INTO students (startLevel, currentLevel, userID)  
-        VALUES ("${startLevel}", "${currentLevel}", ${userID});`;
-      await db(sql);
-      let results = await db("SELECT * FROM students;");
-      res.send(results.data);
-    } catch(err) {
-      res.status(500).send({ error: err.message});
-    }  
-  });
+  try {    
+      // Insert the student
+      let results = await db(sql);
+      
+      // The results contain the new Foreign Key userID thanks to SELECT LAST_INSERT_ID()
+      let newUserID = results.data[0].insertId;
+
+      let sql2 = `
+          INSERT INTO students (startLevel, currentLevel, userID)
+          VALUES ('${startLevel}', '${currentLevel}', ${newUserID});
+          SELECT LAST_INSERT_ID();
+        `;
+          await db(sql2);
+
+      // Set status code for "student created" and return all students
+      res.status(201);
+      sendAllStudents(res);
+  } catch (err) {
+      res.status(500).send({ error: err.message });  
+  }
+});
+
 
 
 module.exports = router;

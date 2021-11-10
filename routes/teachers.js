@@ -97,20 +97,38 @@ router.get('/:id', ensureTeacherExists, async function(req, res) {
   }
 });
 
-//POST to /teachers  
-router.post('/', async function(req,res,next){
-    let { qualifications, experience, userID } = req.body;
-  
-    try{
-      let sql = 
-        `INSERT INTO teachers (qualifications, experience, userID)  
-        VALUES ("${qualifications}", ${experience}, ${userID});`;
-      await db(sql);
-      let results = await db("SELECT * FROM teachers;");
-      res.send(results.data);
-    } catch(err) {
-      res.status(500).send({ error: err.message});
-    }  
-  });
+// POST a new teacher
+router.post('/', async function(req, res) {
+  let { username, password, email, type, qualifications, experience } = req.body;
+
+  let sql = `
+      INSERT INTO users (username, password, email, type)
+      VALUES ('${username}', '${password}', '${email}', '${type}');
+      SELECT LAST_INSERT_ID();
+  `;
+
+  try {    
+      // Insert the teacher
+      let results = await db(sql);
+      
+      // The results contain the new Foreign Key userID thanks to SELECT LAST_INSERT_ID()
+      let newUserID = results.data[0].insertId;
+
+      let sql2 = `
+          INSERT INTO teachers (qualifications, experience, userID)
+          VALUES ('${qualifications}', '${experience}', ${newUserID});
+          SELECT LAST_INSERT_ID();
+        `;
+          await db(sql2);
+
+      // Set status code for "teacher created" and return all teachers
+      res.status(201);
+      sendAllTeachers(res);
+  } catch (err) {
+      res.status(500).send({ error: err.message });  
+  }
+});
+
+
 
 module.exports = router;
