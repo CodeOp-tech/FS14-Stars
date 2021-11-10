@@ -90,7 +90,7 @@ router.get('/:id', ensureStudentExists, async function(req, res) {
   try {
       // Get student; we know it exists, thanks to guard
       // Use LEFT JOIN to also return user details
-      // Use LEFT JOIN to also return student scores
+      // Use RIGHT JOIN to also return student scores
       let sql = `
           SELECT students.*, u.*, scores.*, students.id AS studentId, u.id AS userId, scores.id AS scoreId
           FROM students AS students
