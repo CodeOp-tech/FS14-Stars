@@ -5,6 +5,8 @@ const db = require("../model/helper");
 // http://localhost:5000/scores 
 // feth from /scores
 
+
+
 //GET ALL SCORES from /scores
 router.get('/', async function(req, res, next){
     try{

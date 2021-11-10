@@ -48,8 +48,8 @@ CREATE TABLE items (
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, 
     seq INT,
     sentence VARCHAR(5000), 
-    options VARCHAR(5000),
-    answer VARCHAR(5000),
+    options VARCHAR(3000),
+    answer VARCHAR(500),
     explanation VARCHAR(5000),
     exerciseID INT NOT NULL,
     FOREIGN KEY (exerciseID) REFERENCES exercises(id) ON DELETE CASCADE
