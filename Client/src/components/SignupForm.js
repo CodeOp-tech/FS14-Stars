@@ -1,10 +1,12 @@
 import React from 'react'
-import Form from 'react-bootstrap';
+import { Form, Button, Row, Col, Container } from 'react-bootstrap';
+
 function SignupForm() {
 return (
 <div>
+<Container>
 <Form>
-     <Row className="mb-3">
+    <Row className="mb-3">
          <Form.Group className="mb-3" controlId="formGridAddress1">
          <Form.Label>Your Name</Form.Label>
          <Form.Control placeholder="insert your name..." />
@@ -30,7 +32,9 @@ return (
     Submit
   </Button>
 </Form>
+</Container>
 </div>
     )
-}
-export default SignupForm
+};
+
+export default SignupForm;
