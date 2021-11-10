@@ -58,6 +58,7 @@ CREATE TABLE items (
 -- creates SCORES table
 CREATE TABLE scores ( 
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    date_time DATETIME DEFAULT NOW(),
     studentID INT NOT NULL,
     exerciseID INT NOT NULL,
     score INT,
@@ -100,7 +101,7 @@ INSERT INTO items (seq, sentence, options, answer, explanation, exerciseID)
            (6, 'He started <menu> asking', 'out, in, to', 'out', 'TO START OUT: PHRASAL VERB: to begin.', 1), 
            (7, 'her <menu> her life', 'about, of, with', 'about', 'ABOUT: can be used as a preposition to mean "on the subject of" or "concerning"', 1),
            (8, 'before he moved on to asking her <menu> her number.', 'for, to, with', 'for', 'TO ASK FOR: PHRASAL VERB: To request for something.', 1), 
-           (9, 'Later on, he called her up and manage to ask her <menu>.', 'to, out, of', 'out', 'TO ASK OUT: PHRASAL VERB: Invite someone out on a date.', 1),
+           (9, 'Later on, he called her up and managed to ask her <menu>.', 'to, out, of', 'out', 'TO ASK OUT: PHRASAL VERB: Invite someone out on a date.', 1),
            (10, 'The next day, I found him lying <menu> the floor, unconscious.', 'on, at, in', 'on', 'ON: PREPOSITION OF PLACE', 1),
            (11, 'When he finally came <menu>,', 'with, to, from', 'to', 'TO COME TO: PHRASAL VERB: to regain consciousness.', 1),
            (12, 'he looked for the woman but he found <menu> that she had already gone.', 'out, of, to', 'out', 'TO FIND OUT: PHRASAL VERB: to discover.', 1),
@@ -125,4 +126,5 @@ INSERT INTO items (seq, sentence, options, answer, explanation, exerciseID)
 
 -- initial SCORES table
 INSERT INTO scores (studentID, exerciseID, score)
-    VALUES (1, 1, 100);
+    VALUES (1, 1, 100),
+           (1, 2, 30);
