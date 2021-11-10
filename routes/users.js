@@ -14,23 +14,6 @@ router.get('/', async function(req, res, next){
   }  
 });
 
-// adds username, password, email, type in the table
-// password unhashed
-
-router.post('/', async function(req,res,next){
-  let { username, password, email, type } = req.body;
-
-  try{
-    let sql = 
-      `INSERT INTO users (username, password, email, type)  
-      VALUES ("${username}", "${password}", "${email}", "${type}");`;
-    await db(sql);
-    let results = await db("SELECT * FROM users;");
-    res.send(results.data);
-  } catch(err) {
-    res.status(500).send({ error: err.message});
-  }  
-});
 
 
 module.exports = router;

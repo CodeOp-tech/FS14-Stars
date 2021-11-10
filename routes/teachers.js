@@ -99,7 +99,7 @@ router.get('/:id', ensureTeacherExists, async function(req, res) {
 
 // POST a new teacher
 router.post('/', async function(req, res) {
-  let { username, password, email, type } = req.body;
+  let { username, password, email, type, qualifications, experience } = req.body;
 
   let sql = `
       INSERT INTO users (username, password, email, type)
@@ -107,49 +107,28 @@ router.post('/', async function(req, res) {
       SELECT LAST_INSERT_ID();
   `;
 
-  try {
-      // Insert the book
+  try {    
+      // Insert the teacher
       let results = await db(sql);
-      // The results contain the new ID thanks to SELECT LAST_INSERT_ID()
-      let newBookId = results.data[0].insertId;
+      
+      // The results contain the new Foreign Key userID thanks to SELECT LAST_INSERT_ID()
+      let newUserID = results.data[0].insertId;
 
-      // Add book/authors to junction table
-      if (authorIds && authorIds.length) {
-          let vals = [];
-          for (let authId of authorIds) {
-              vals.push( `(${newBookId}, ${authId})` );
-          }
-          let sql = `
-              INSERT INTO books_authors (bookId, authorId) 
-              VALUES ${vals.join(',')}
-              `;
-          await db(sql);
-      }
+      let sql2 = `
+          INSERT INTO teachers (qualifications, experience, userID)
+          VALUES ('${qualifications}', '${experience}', ${newUserID});
+          SELECT LAST_INSERT_ID();
+        `;
+          await db(sql2);
 
-      // Set status code for "resource created" and return all books
+      // Set status code for "teacher created" and return all teachers
       res.status(201);
-      sendAllBooks(res);
+      sendAllTeachers(res);
   } catch (err) {
       res.status(500).send({ error: err.message });  
   }
 });
 
 
-
-//POST to /teachers  
-router.post('/', async function(req,res,next){
-    let { qualifications, experience, userID } = req.body;
-  
-    try{
-      let sql = 
-        `INSERT INTO teachers (qualifications, experience, userID)  
-        VALUES ("${qualifications}", ${experience}, ${userID});`;
-      await db(sql);
-      let results = await db("SELECT * FROM teachers;");
-      res.send(results.data);
-    } catch(err) {
-      res.status(500).send({ error: err.message});
-    }  
-  });
 
 module.exports = router;
