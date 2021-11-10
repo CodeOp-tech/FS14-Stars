@@ -48,8 +48,8 @@ CREATE TABLE items (
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, 
     seq INT,
     sentence VARCHAR(5000), 
-    options VARCHAR(5000),
-    answer VARCHAR(5000),
+    options VARCHAR(3000),
+    answer VARCHAR(500),
     explanation VARCHAR(5000),
     exerciseID INT NOT NULL,
     FOREIGN KEY (exerciseID) REFERENCES exercises(id) ON DELETE CASCADE
@@ -86,8 +86,9 @@ INSERT INTO students (startLevel, currentLevel, userID)
 
 -- initial EXERCISES table data
 INSERT INTO exercises (category, title, level) 
-    VALUES ('prepositions', 'Mixed Prepositions Exercise', 'ADVANCED'),
-           ('adjectives', 'Adjectives of Quantity', 'INTERMEDIATE');
+    VALUES ('prepositions', 'The Mysterious Woman: Mixed Prepositions Exercise', 'ADVANCED'),
+           ('adjectives', 'Adjectives of Quantity', 'INTERMEDIATE'),
+           ('prepositions', 'Mixed Prepositions Exercise', 'INTERMEDIATE');
  
 -- initial ITEMS table data, consists of 2 exercises: prepositions and adjectives
 INSERT INTO items (seq, sentence, options, answer, explanation, exerciseID)  
@@ -110,7 +111,17 @@ INSERT INTO items (seq, sentence, options, answer, explanation, exerciseID)
            (3, 'Can you give me <menu> minutes?', 'few, a few', 'a few', '', 2),
            (4, 'I have <menu> money, I cannot afford to go out.', 'a little, little', 'little', '', 2),
            (5, 'My family and I have <menu> arguments', 'little, few', 'few', '', 2),
-           (6, 'They have <menu> education. He does not know how to write properly.', 'little, a little', 'little', '', 2);
+           (6, 'They have <menu> education. He does not know how to write properly.', 'little, a little', 'little', '', 2),
+           (1, "He got married <menu> his boss.", "with, to", "to ", "", 3),
+           (2, "I found it <menu> the internet.", "in, on", "on", "", 3),
+           (3, "I have known him <menu> two years.", "since, for", "for", "", 3),
+           (4, "Can I borrow this <menu> you?", "of, from, to", "from", "", 3),
+           (5, "Throw the rubbish <menu> the bin.", "at, to, in", "in", "", 3),
+           (6, "She is <menu> her mobile.", "with, on", "on", "", 3),
+           (7, "Can you translate this <menu> Chinese for me?", "in, to, into", "into", "", 3),
+           (8, "They stopped him <menu> stealing the bike.", "to, from, with", "from ", "", 3),
+           (9, "They stopped him <menu> ask for directions.", "to, for, by", "to", "", 3),
+           (10, "We were bored <menu> the film.", "about, by", "by", "", 3);
 
 -- initial SCORES table
 INSERT INTO scores (studentID, exerciseID, score)

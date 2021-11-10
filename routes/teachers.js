@@ -41,7 +41,8 @@ function joinToJson(results) {
   let row0 = results.data[0];
 
   // Create array of user objects
-  let user = [];
+  let user =[];
+  
   if (row0.userId) {
       user = results.data.map(u => ({
           id: u.userId,
