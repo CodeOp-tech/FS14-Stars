@@ -40,17 +40,6 @@ function joinToJson(results) {
   // Get first row
   let row0 = results.data[0];
 
-  // Create array of scores
-  let scores = [];
-  if (row0.scoreId) {
-      scores = results.data.map(row => ({
-      id: row.scoreId,
-      exerciseID: row.exerciseID,
-      studentID: row.studentID,
-      score: row.score,
-        }));
-    }
-  
   // Create user object
   let user = {
     id: row0.userId,
@@ -59,8 +48,27 @@ function joinToJson(results) {
     email: row0.email,
     type: row0.type
   };
+
+  // Create exercise object
+  // let exercise = {
+  //   id: row0.exerciseId,
+  //   category: row0.category,
+  //   title: row0.title,
+  //   level: row0.level
+  // }
+
+  // Create array of scores
+  let scores = [];
+  if (row0.scoreId) {
+      scores = results.data.map(row => ({
+      id: row.scoreId,
+      exerciseID: row.exerciseID, 
+      studentID: row.studentID,
+      score: row.score,
+        }));
+    }
   
-  // Create student objects
+  // Create student object
   let student = {
       id: row0.studentId,
       startLevel: row0.startLevel,
