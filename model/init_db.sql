@@ -20,7 +20,7 @@ CREATE TABLE users (
 -- creates TEACHERS table with the following specifications
 CREATE TABLE teachers (
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    qualifications VARCHAR(100),
+    qualifications VARCHAR(500),
     experience INT,
     userID INT,
     FOREIGN KEY (userID) REFERENCES users(id) ON DELETE CASCADE
@@ -48,8 +48,8 @@ CREATE TABLE items (
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, 
     seq INT,
     sentence VARCHAR(5000), 
-    options VARCHAR(500),
-    answer VARCHAR(500),
+    options VARCHAR(5000),
+    answer VARCHAR(5000),
     explanation VARCHAR(5000),
     exerciseID INT NOT NULL,
     FOREIGN KEY (exerciseID) REFERENCES exercises(id) ON DELETE CASCADE

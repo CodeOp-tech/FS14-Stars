@@ -3,7 +3,7 @@ var router = express.Router();
 const db = require("../model/helper");
 
 // http://localhost:5000/users 
-// feth from /users
+// fetch from /users
 
 router.get('/', async function(req, res, next){
   try{
