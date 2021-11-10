@@ -2,33 +2,34 @@ var express = require('express');
 var router = express.Router();
 const db = require("../model/helper");
 
-// http://localhost:5000/teachers 
-// fetch from /teachers
+// http://localhost:5000/students
+// fetch from /students
 
-//GET ALL teachers from /teachers
+//GET ALL students from /students
 router.get('/', async function(req, res, next){
     try{
-      let response = await db("SELECT * FROM teachers;");
+      let response = await db("SELECT * FROM students;");
       res.send(response.data);
     } catch(err) {
       res.status(500).send({ error: "Sorry. We are encountering technical difficulties."});
     }  
   });
 
-//POST to /teachers  
+//POST to /students  
 router.post('/', async function(req,res,next){
-    let { qualifications, experience, userID } = req.body;
+    let { startLevel, currentLevel, userID } = req.body;
   
     try{
       let sql = 
-        `INSERT INTO teachers (qualifications, experience, userID)  
-        VALUES ("${qualifications}", ${experience}, ${userID});`;
+        `INSERT INTO students (startLevel, currentLevel, userID)  
+        VALUES ("${startLevel}", "${currentLevel}", ${userID});`;
       await db(sql);
-      let results = await db("SELECT * FROM teachers;");
+      let results = await db("SELECT * FROM students;");
       res.send(results.data);
     } catch(err) {
       res.status(500).send({ error: err.message});
     }  
   });
+
 
 module.exports = router;
