@@ -88,8 +88,8 @@ router.get('/:id', ensureExerciseExists, async function(req, res) {
       // Use LEFT JOIN to also return items
       let sql = `
           SELECT e.*, i.*, e.id AS exerciseId, i.id AS itemId
-          FROM items AS i
-          LEFT JOIN exercises AS e ON exerciseId = e.id
+          FROM exercises AS e
+          LEFT JOIN items AS i ON i.exerciseID = e.id
           WHERE e.id = ${req.params.id}
       `;
 
