@@ -25,8 +25,11 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/exercises', exercisesRouter);
 app.use('/items', itemsRouter);
+app.use('/users', usersRouter)
+=======
 app.use('/teachers', teachersRouter);
 app.use('/students', studentsRouter);
 app.use('/scores', scoresRouter);
+>>>>>>> staging
 
 module.exports = app;
