@@ -1,4 +1,10 @@
-import './App.css';
+import { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
+import "./App.css";
+
+
+
+
 
 import Navbar from './components/Navbar';
 import Routes from './components/Routes';
@@ -7,7 +13,7 @@ import Routes from './components/Routes';
 function App() {
     return (
         <div className="App">
-      <h1>Educational Platform</h1>
+      <h1>Teach Me</h1>
 
       <Navbar />
       <Routes />
