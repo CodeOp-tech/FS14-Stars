@@ -49,20 +49,26 @@ function joinToJson(results) {
     type: row0.type
   };
 
-  // Create exercise object
-  // let exercise = {
-  //   id: row0.exerciseId,
-  //   category: row0.category,
-  //   title: row0.title,
-  //   level: row0.level
-  // }
+  // Create an array of exercises
+  let exercises = [];
+  if(row0.exerciseId){
+    exercises = results.data.map(row => ({
+    id: row.exerciseId,
+    category: row.category,
+    title: row.title,
+    level: row.level
+        }));
+  }
+ 
+  
 
   // Create array of scores
   let scores = [];
   if (row0.scoreId) {
       scores = results.data.map(row => ({
       id: row.scoreId,
-      exerciseID: row.exerciseID, 
+      date_time: row.date_time,
+      exerciseID: row.exerciseID,  
       studentID: row.studentID,
       score: row.score,
         }));
@@ -75,6 +81,7 @@ function joinToJson(results) {
       currentLevel: row0.currentLevel,
       userID: row0.userID,
       user,
+      exercises,
       scores
   };
 
@@ -98,12 +105,13 @@ router.get('/:id', ensureStudentExists, async function(req, res) {
   try {
       // Get student; we know it exists, thanks to guard
       // Use LEFT JOIN to also return user details
-      // Use RIGHT JOIN to also return student scores
+      // Use LEFT JOIN to also return student scores
       let sql = `
-          SELECT students.*, u.*, scores.*, students.id AS studentId, u.id AS userId, scores.id AS scoreId
+          SELECT students.*, u.*, scores.*, e.*, students.id AS studentId, u.id AS userId, scores.id AS scoreId, e.id as exerciseId
           FROM students AS students
           LEFT JOIN users AS u ON students.userID = u.id
-          RIGHT JOIN scores AS scores ON scores.studentID = students.Id 
+          LEFT JOIN scores AS scores ON students.Id = scores.studentID
+          LEFT JOIN exercises AS e ON scores.exerciseID = e.id 
           WHERE students.id = ${req.params.id}
       `;
 
