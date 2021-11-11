@@ -45,7 +45,7 @@ function joinToJson(results) {
   if (row0.itemId) {
       items = results.data.map(i => ({
           id: i.itemId,
-          seq: i.sequence,
+          seq: i.seq,
           sentence: i.sentence,
           options: i.options,
           answer: i.answer,
