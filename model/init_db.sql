@@ -68,10 +68,11 @@ CREATE TABLE scores (
 
 
 -- initial USERS table data
+-- hashed Passwords: Rebecca = pass1, Shandy=pass2, needEnglish = pass3
 INSERT INTO users (username, password, email, type)
-    VALUES ('Rebecca', '12345678', 'rebecca@teachme.com', 'teacher'),
-           ('Shandy', 'shan0926', 'shandy@teachme.com', 'teacher'),
-           ('needEnglish', '87654321', 'needenglish@gmail.com', 'student'),
+    VALUES ('Rebecca', '$2b$12$eFzMWbS9SogNtxkmo3J7aO8FQMFQSKbtpwLMIOVsF6GGKpTQdgq.W', 'rebecca@teachme.com', 'teacher'),
+           ('Shandy', '$2b$12$WZcGPyrkCvD5e8m0Qz/nFOdBryUcsp6uDlE2MDo/AjuBhPrQBCfI6', 'shandy@teachme.com', 'teacher'),
+           ('needEnglish', '$2b$12$tiAz4eaXlpU.CdltUVvw6udLA2BWsitk5zXM2XOm2IpAeAiFfMCdy', 'needenglish@gmail.com', 'student'),
            ('phuong', 'phuong12', 'phuong@gmail.com', 'student');
 
 -- initial TEACHERS table, maybe a checkbox with multiple answers for qualification?
