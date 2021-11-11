@@ -71,8 +71,8 @@ CREATE TABLE scores (
 INSERT INTO users (username, password, email, type)
     VALUES ('Rebecca', '12345678', 'rebecca@teachme.com', 'teacher'),
            ('Shandy', 'shan0926', 'shandy@teachme.com', 'teacher'),
-           ('needEnglish', '87654321', 'needenglish@gmail.com', 'student');
-           
+           ('needEnglish', '87654321', 'needenglish@gmail.com', 'student'),
+           ('phuong', 'phuong12', 'phuong@gmail.com', 'student');
 
 -- initial TEACHERS table, maybe a checkbox with multiple answers for qualification?
 INSERT INTO teachers (qualifications, experience, userID)
@@ -81,7 +81,8 @@ INSERT INTO teachers (qualifications, experience, userID)
 
 -- initial STUDENTS table
 INSERT INTO students (startLevel, currentLevel, userID)
-    VALUES ('Beginner', 'Beginner', 3);
+    VALUES ('Beginner', 'Beginner', 3),
+           ('Intermediate', 'Advanced', 4);
            
 
 
@@ -127,4 +128,6 @@ INSERT INTO items (seq, sentence, options, answer, explanation, exerciseID)
 -- initial SCORES table
 INSERT INTO scores (studentID, exerciseID, score)
     VALUES (1, 1, 100),
-           (1, 2, 30);
+           (1, 2, 30),
+           (2, 1, 80),
+           (2, 3, 70);
