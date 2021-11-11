@@ -11,7 +11,7 @@ import ShandyRView from '../views/ShandyRView';
 import Error404View from '../components/Error404View';
 
 
-function Routes() {
+function Routes(props) {
 return (
      
      <Switch> 
@@ -33,7 +33,7 @@ return (
 
                 {/* IngaB View */}
                <Route path="/ingabview">
-                    <IngaBView />
+                    <IngaBView submitCb = {InitialUsers => props.submitCb(InitialUsers)}/>
                </Route>
 
                {/* RebeccaG View */}
