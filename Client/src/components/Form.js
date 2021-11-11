@@ -2,28 +2,12 @@ import React, {useState, useEffect} from "react";
 
 function Form(){
 
-const [exObjs, setExObjs] = useState ([{sentence: "", options: "", answer: ""}]);
 
-const getExObjs = () => {
-
-  const getExObjs = () => {
-    fetch("/items") 
-      .then(res => res.json())
-      .then(json => {
-        setExObjs(json);
-        
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  }
-
-useEffect(() => {
-  getExObjs();
-}, []);
 
 //ok so here i will get the exercises and they will be saved in the use state 
-//how do i display them on the page?
+//need to render the objects as a list etc - i can try with whatevers already there or i can 
+//wait until shandy puts my one in database and try to fetch it using only ID 
+//first console log to see if they are actually appearing 
 
 return (
     <div className="Form">
