@@ -40,16 +40,14 @@ function joinToJson(results) {
   // Get first row
   let row0 = results.data[0];
 
-  // Create array of user objects
-  let user = [];
-  if (row0.userId) {
-      user = results.data.map(u => ({
-          id: u.userId,
-          username: u.username,
-          password: u.password,
-          email: u.email,
-          type: u.type
-      }));
+  // Create user object
+
+  let user = {
+    id: row0.userId,
+    username: row0.username,
+    password: row0.password,
+    email: row0.email,
+    type: row0.type
   }
 
   // Create teacher objects

@@ -58,6 +58,7 @@ CREATE TABLE items (
 -- creates SCORES table
 CREATE TABLE scores ( 
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    date_time DATETIME DEFAULT NOW(),
     studentID INT NOT NULL,
     exerciseID INT NOT NULL,
     score INT,
@@ -70,8 +71,8 @@ CREATE TABLE scores (
 INSERT INTO users (username, password, email, type)
     VALUES ('Rebecca', '12345678', 'rebecca@teachme.com', 'teacher'),
            ('Shandy', 'shan0926', 'shandy@teachme.com', 'teacher'),
-           ('needEnglish', '87654321', 'needenglish@gmail.com', 'student');
-           
+           ('needEnglish', '87654321', 'needenglish@gmail.com', 'student'),
+           ('phuong', 'phuong12', 'phuong@gmail.com', 'student');
 
 -- initial TEACHERS table, maybe a checkbox with multiple answers for qualification?
 INSERT INTO teachers (qualifications, experience, userID)
@@ -80,14 +81,16 @@ INSERT INTO teachers (qualifications, experience, userID)
 
 -- initial STUDENTS table
 INSERT INTO students (startLevel, currentLevel, userID)
-    VALUES ('Beginner', 'Beginner', 3);
+    VALUES ('Beginner', 'Beginner', 3),
+           ('Intermediate', 'Advanced', 4);
            
 
 
 -- initial EXERCISES table data
 INSERT INTO exercises (category, title, level) 
-    VALUES ('prepositions', 'Mixed Prepositions Exercise', 'ADVANCED'),
-           ('adjectives', 'Adjectives of Quantity', 'INTERMEDIATE');
+    VALUES ('prepositions', 'The Mysterious Woman: Mixed Prepositions Exercise', 'ADVANCED'),
+           ('adjectives', 'Adjectives of Quantity', 'INTERMEDIATE'),
+           ('prepositions', 'Mixed Prepositions Exercise', 'INTERMEDIATE');
  
 -- initial ITEMS table data, consists of 2 exercises: prepositions and adjectives
 INSERT INTO items (seq, sentence, options, answer, explanation, exerciseID)  
@@ -99,7 +102,7 @@ INSERT INTO items (seq, sentence, options, answer, explanation, exerciseID)
            (6, 'He started <menu> asking', 'out, in, to', 'out', 'TO START OUT: PHRASAL VERB: to begin.', 1), 
            (7, 'her <menu> her life', 'about, of, with', 'about', 'ABOUT: can be used as a preposition to mean "on the subject of" or "concerning"', 1),
            (8, 'before he moved on to asking her <menu> her number.', 'for, to, with', 'for', 'TO ASK FOR: PHRASAL VERB: To request for something.', 1), 
-           (9, 'Later on, he called her up and manage to ask her <menu>.', 'to, out, of', 'out', 'TO ASK OUT: PHRASAL VERB: Invite someone out on a date.', 1),
+           (9, 'Later on, he called her up and managed to ask her <menu>.', 'to, out, of', 'out', 'TO ASK OUT: PHRASAL VERB: Invite someone out on a date.', 1),
            (10, 'The next day, I found him lying <menu> the floor, unconscious.', 'on, at, in', 'on', 'ON: PREPOSITION OF PLACE', 1),
            (11, 'When he finally came <menu>,', 'with, to, from', 'to', 'TO COME TO: PHRASAL VERB: to regain consciousness.', 1),
            (12, 'he looked for the woman but he found <menu> that she had already gone.', 'out, of, to', 'out', 'TO FIND OUT: PHRASAL VERB: to discover.', 1),
@@ -110,8 +113,21 @@ INSERT INTO items (seq, sentence, options, answer, explanation, exerciseID)
            (3, 'Can you give me <menu> minutes?', 'few, a few', 'a few', '', 2),
            (4, 'I have <menu> money, I cannot afford to go out.', 'a little, little', 'little', '', 2),
            (5, 'My family and I have <menu> arguments', 'little, few', 'few', '', 2),
-           (6, 'They have <menu> education. He does not know how to write properly.', 'little, a little', 'little', '', 2);
+           (6, 'They have <menu> education. He does not know how to write properly.', 'little, a little', 'little', '', 2),
+           (1, "He got married <menu> his boss.", "with, to", "to ", "", 3),
+           (2, "I found it <menu> the internet.", "in, on", "on", "", 3),
+           (3, "I have known him <menu> two years.", "since, for", "for", "", 3),
+           (4, "Can I borrow this <menu> you?", "of, from, to", "from", "", 3),
+           (5, "Throw the rubbish <menu> the bin.", "at, to, in", "in", "", 3),
+           (6, "She is <menu> her mobile.", "with, on", "on", "", 3),
+           (7, "Can you translate this <menu> Chinese for me?", "in, to, into", "into", "", 3),
+           (8, "They stopped him <menu> stealing the bike.", "to, from, with", "from ", "", 3),
+           (9, "They stopped him <menu> ask for directions.", "to, for, by", "to", "", 3),
+           (10, "We were bored <menu> the film.", "about, by", "by", "", 3);
 
 -- initial SCORES table
 INSERT INTO scores (studentID, exerciseID, score)
-    VALUES (1, 1, 100);
+    VALUES (1, 1, 100),
+           (1, 2, 30),
+           (2, 1, 80),
+           (2, 3, 70);

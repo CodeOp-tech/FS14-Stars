@@ -40,25 +40,49 @@ function joinToJson(results) {
   // Get first row
   let row0 = results.data[0];
 
-  // Create array of user objects
-  let user = [];
-  if (row0.userId) {
-      user = results.data.map(u => ({
-          id: u.userId,
-          username: u.username,
-          password: u.password,
-          email: u.email,
-          type: u.type
-      }));
-  }
+  // Create user object
+  let user = {
+    id: row0.userId,
+    username: row0.username,
+    password: row0.password,
+    email: row0.email,
+    type: row0.type
+  };
 
-  // Create teacher objects
+  // Create an array of exercises
+  let exercises = [];
+  if(row0.exerciseId){
+    exercises = results.data.map(row => ({
+    id: row.exerciseId,
+    category: row.category,
+    title: row.title,
+    level: row.level
+        }));
+  }
+ 
+  
+
+  // Create array of scores
+  let scores = [];
+  if (row0.scoreId) {
+      scores = results.data.map(row => ({
+      id: row.scoreId,
+      date_time: row.date_time,
+      exerciseID: row.exerciseID,  
+      studentID: row.studentID,
+      score: row.score,
+        }));
+    }
+  
+  // Create student object
   let student = {
       id: row0.studentId,
       startLevel: row0.startLevel,
       currentLevel: row0.currentLevel,
       userID: row0.userID,
-      user
+      user,
+      exercises,
+      scores
   };
 
   return student;
@@ -81,11 +105,14 @@ router.get('/:id', ensureStudentExists, async function(req, res) {
   try {
       // Get student; we know it exists, thanks to guard
       // Use LEFT JOIN to also return user details
+      // Use LEFT JOIN to also return student scores
       let sql = `
-          SELECT s.*, u.*, s.id AS studentId, u.id AS userId
-          FROM students AS s
-          LEFT JOIN users AS u ON s.userID = u.id
-          WHERE s.id = ${req.params.id}
+          SELECT students.*, u.*, scores.*, e.*, students.id AS studentId, u.id AS userId, scores.id AS scoreId, e.id as exerciseId
+          FROM students AS students
+          LEFT JOIN users AS u ON students.userID = u.id
+          LEFT JOIN scores AS scores ON students.Id = scores.studentID
+          LEFT JOIN exercises AS e ON scores.exerciseID = e.id 
+          WHERE students.id = ${req.params.id}
       `;
 
       let results = await db(sql);
