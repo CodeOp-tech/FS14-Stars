@@ -1,6 +1,9 @@
 var express = require('express');
 var router = express.Router();
 const db = require("../model/helper");
+const bcrypt = require('bcrypt');
+const { BCRYPT_WORK_FACTOR } = require('../config');
+
 
 // http://localhost:5000/students
 // fetch from /students
@@ -36,7 +39,7 @@ const db = require("../model/helper");
 
 
 // Convert the DB results into a useful (nested) JSON format, exercise with list of items
-function joinToJson(results) {
+function joinToJsonStudent(results) {
   // Get first row
   let row0 = results.data[0];
 
@@ -48,6 +51,23 @@ function joinToJson(results) {
     email: row0.email,
     type: row0.type
   };
+  
+  // Create student object
+  let student = {
+      id: row0.studentId,
+      startLevel: row0.startLevel,
+      currentLevel: row0.currentLevel,
+      userID: row0.userID,
+      user,
+  };
+
+  return student;
+}
+
+// Convert the DB results into a useful (nested) JSON format, exercise with list of items
+function joinToJsonCompleted(results) {
+  // Get first row
+  let row0 = results.data[0];
 
   // Create an array of exercises
   let exercises = [];
@@ -60,8 +80,6 @@ function joinToJson(results) {
         }));
   }
  
-  
-
   // Create array of scores
   let scores = [];
   if (row0.scoreId) {
@@ -74,19 +92,15 @@ function joinToJson(results) {
         }));
     }
   
-  // Create student object
-  let student = {
-      id: row0.studentId,
-      startLevel: row0.startLevel,
-      currentLevel: row0.currentLevel,
-      userID: row0.userID,
-      user,
+  // Create completed
+  let completed = {
       exercises,
       scores
   };
 
-  return student;
+  return completed;
 }
+
 
 
 //GET ALL students from /students
@@ -117,9 +131,32 @@ router.get('/:id', ensureStudentExists, async function(req, res) {
 
       let results = await db(sql);
       // Convert DB results into "sensible" JSON
-      let student = joinToJson(results);
+      let student = joinToJsonStudent(results);
 
       res.send(student);
+  } catch (err) {
+      res.status(500).send({ error: err.message });
+  }
+});
+
+// GET student scores by ID
+router.get('/:id/scores', ensureStudentExists, async function(req, res) {
+  try {
+      // Get student; we know it exists, thanks to guard
+      // Use LEFT JOIN to return exercises
+      // Use LEFT JOIN to also return student scores
+      let sql = `
+          SELECT scores.*, e.*, scores.id AS scoreId, e.id as exerciseId
+          FROM scores AS scores
+          LEFT JOIN exercises AS e ON scores.exerciseID = e.id 
+          WHERE scores.studentID = ${req.params.id}
+      `;
+
+      let results = await db(sql);
+      // Convert DB results into "sensible" JSON
+      let completed = joinToJsonCompleted(results);
+
+      res.send(completed);
   } catch (err) {
       res.status(500).send({ error: err.message });
   }
@@ -128,10 +165,11 @@ router.get('/:id', ensureStudentExists, async function(req, res) {
 // POST a new student
 router.post('/', async function(req, res) {
   let { username, password, email, type, startLevel, currentLevel } = req.body;
+  let hashedPassword = await bcrypt.hash(password, BCRYPT_WORK_FACTOR);
 
   let sql = `
       INSERT INTO users (username, password, email, type)
-      VALUES ('${username}', '${password}', '${email}', '${type}');
+      VALUES ('${username}', '${hashedPassword}', '${email}', '${type}');
       SELECT LAST_INSERT_ID();
   `;
 
@@ -145,7 +183,6 @@ router.post('/', async function(req, res) {
       let sql2 = `
           INSERT INTO students (startLevel, currentLevel, userID)
           VALUES ('${startLevel}', '${currentLevel}', ${newUserID});
-          SELECT LAST_INSERT_ID();
         `;
           await db(sql2);
 
