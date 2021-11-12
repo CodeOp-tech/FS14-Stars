@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 
-function Form(){
+function ExerciseItems(){
   const [exercise, setExercise] = useState(null); 
   const [guesses, setGuesses] = useState({});
   const [showAnswer, setShowAnswer] = useState(false); 
@@ -11,8 +11,6 @@ function Form(){
     .then(json => {
          console.log(json);
        setExercise(json);
-       //console.log(json);
-       
     })
     .catch((err) => console.log(err));
 
@@ -25,8 +23,7 @@ getExercise();
 function handleSubmit(e){
     e.preventDefault(e);
     showFunction()
-    // console.log("hello")
-};//reset form?
+};
 
 function handleChange(e){
     setGuesses({ ...guesses, [e.target.name]: e.target.value});
@@ -75,7 +72,6 @@ function buildSentence(item) {
             showAnswer && buildAnswer(item)
           }
             </div>
-           
         </div>
     );
   
@@ -97,14 +93,11 @@ return (
         <div className="card-body">
              <h4 className="card-title">Exercise One</h4>  
         
-  
         </div>
         </div>
         <div className="card">
         <form onSubmit={handleSubmit}>
           
-        
-            
             <ol>
             {
                 exercise && exercise.items.map(item => (
@@ -112,26 +105,15 @@ return (
                 ))
             }
             </ol>
-            
         
             <button type="submit" className="btn btn-primary">Get Answers</button>
         </form>
         </div>
     </div>
-    
   </div>
     )
 
 };
     
-export default Form;    
+export default ExerciseItems;    
 
-{/* <ol>
-          {
-          exObjs.map(e => (
-          <li className="mb-2" key={e.id}>
-              {buildSentence(e)}
-          </li>
-          ))
-          }
-        </ol> */}
