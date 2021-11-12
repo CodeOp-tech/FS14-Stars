@@ -109,7 +109,6 @@ router.get('/:id', ensureTeacherExists, async function(req, res) {
 // POST A TEACHER (REGISTER A NEW TEACHER)
 router.post('/', async function(req, res) {
   let { username, password, email, type, qualifications, experience } = req.body;
-  console.log(req.body);
   let hashedPassword = await bcrypt.hash(password, BCRYPT_WORK_FACTOR);
 
   let sql = `
@@ -127,7 +126,7 @@ router.post('/', async function(req, res) {
 
       let sql2 = `
           INSERT INTO teachers (qualifications, experience, userID)
-          VALUES ('${qualifications}', '${experience}', ${newUserID});
+          VALUES ('${qualifications}', ${experience}, ${newUserID});
         `;
           await db(sql2);
 
