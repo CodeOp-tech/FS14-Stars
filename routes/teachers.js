@@ -1,9 +1,20 @@
 var express = require('express');
 var router = express.Router();
 const db = require("../model/helper");
+const bcrypt = require('bcrypt');
+const { BCRYPT_WORK_FACTOR } = require('../config');
+
+// const jwt = require("jsonwebtoken"); // secret key for log in purposes... 
+// where to put log in? leave it here? or create a login page?
+
 
 // http://localhost:5000/teachers 
 // fetch from /teachers
+// GET all teachers
+// GET one teacher with teacher information (teachers/id)
+// POST new teacher, (register new teacher)
+
+
 
 /**
  * Guards
@@ -95,13 +106,15 @@ router.get('/:id', ensureTeacherExists, async function(req, res) {
   }
 });
 
-// POST a new teacher
+// POST A TEACHER (REGISTER A NEW TEACHER)
 router.post('/', async function(req, res) {
   let { username, password, email, type, qualifications, experience } = req.body;
+  console.log(req.body);
+  let hashedPassword = await bcrypt.hash(password, BCRYPT_WORK_FACTOR);
 
   let sql = `
       INSERT INTO users (username, password, email, type)
-      VALUES ('${username}', '${password}', '${email}', '${type}');
+      VALUES ('${username}', '${hashedPassword}', '${email}', '${type}');
       SELECT LAST_INSERT_ID();
   `;
 
@@ -115,7 +128,6 @@ router.post('/', async function(req, res) {
       let sql2 = `
           INSERT INTO teachers (qualifications, experience, userID)
           VALUES ('${qualifications}', '${experience}', ${newUserID});
-          SELECT LAST_INSERT_ID();
         `;
           await db(sql2);
 
