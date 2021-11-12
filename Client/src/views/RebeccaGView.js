@@ -13,23 +13,10 @@ const [exercise, setExercise] = useState(null);
 //now how to get the ones i want 
 //why is it null
 
-const getExercise = () => {
+
 //console.log("hello");
 //fetch("/items") 
-fetch("/exercises/3") 
-    .then(res => res.json())
-    .then(json => {
-         console.log(json);
-       setExercise(json);
-       //console.log(json);
-       
-    })
-    .catch((err) => console.log(err));
-}
 
-useEffect(() => {
-getExercise();
-}, []);
 
 
     //<Form/>
