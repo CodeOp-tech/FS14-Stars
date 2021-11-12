@@ -11,6 +11,7 @@ const [exercise, setExercise] = useState(null);
 //ones that are not exercise 3. 
 //so we have the title, category, level and items being stored in useState
 //now how to get the ones i want 
+//why is it null
 
 const getExercise = () => {
 //console.log("hello");

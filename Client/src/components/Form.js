@@ -15,10 +15,25 @@ import React, {useState, useEffect} from "react";
 
 
 function Form(){
-const [exercise, setExercise] = useState(null); //does this need to change
-  //optionally store the explanation if i need to use it - so this should be correct the way this is stored 
+const [exercise, setExercise] = useState(null); 
+  
     // const [guesses, setGuesses] = useState({});
   //  const [showAnswer, setShowAnswer] = useState(false); 
+  const getExercise = () => {
+  fetch("/exercises/3") 
+    .then(res => res.json())
+    .then(json => {
+         console.log(json);
+       setExercise(json);
+       //console.log(json);
+       
+    })
+    .catch((err) => console.log(err));
+
+  }
+useEffect(() => {
+getExercise();
+}, []);
 
 
 function handleSubmit(e){
