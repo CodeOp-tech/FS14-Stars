@@ -6,7 +6,7 @@ function ExerciseItems(){
   const [showAnswer, setShowAnswer] = useState(false); 
 
   const getExercise = () => {
-  fetch("/exercises/3") 
+  fetch("/exercises/5") 
     .then(res => res.json())
     .then(json => {
          console.log(json);
@@ -60,19 +60,23 @@ function buildSentence(item) {
 
     //select required, requires them to fill in all elements in the form required
     let sentence = (
-        <div className="sentence"> 
+      <tr> 
+        <td className="sentence">
             {parts[0]}
             <select id={'ex-'+item.id} name={item.id} onChange={handleChange} >
                 <option value="">choose one...</option>
                 {optArr}
             </select>
             {parts[1]}
+            </td>
+            <td>
             <div className="showAnswer">
           {
             showAnswer && buildAnswer(item)
           }
             </div>
-        </div>
+            </td>
+        </tr>
     );
   
     return sentence;
@@ -97,14 +101,18 @@ return (
         </div>
         <div className="card">
         <form onSubmit={handleSubmit}>
+        <table>
+            <tbody>
           
             <ol>
             {
                 exercise && exercise.items.map(item => (
-                    <li className="mb-2" key={item.id}>{buildSentence(item)}<br/></li>
+                    <li className="mb-2 mr-2" key={item.id}>{buildSentence(item)}<br/></li>
                 ))
             }
             </ol>
+            </tbody>
+          </table>
         
             <button type="submit" className="btn btn-primary">Get Answers</button>
         </form>
