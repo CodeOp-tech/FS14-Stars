@@ -35,14 +35,15 @@ function ensureUserLoggedIn(req, res, next) {
 
 function ensureSameUser(req, res, next) {
     let token = _getToken(req);
-
+    let {userID} = req.body;
     try {
         // Throws error on invalid/missing token
         let payload = jwt.verify(token, SECRET_KEY);
+
         // If we get here, a valid token was passed
         if (payload.userId === Number(req.params.userId)) {
             next();
-        } else {
+        } else {ss
             res.status(401).send({ error: 'Unauthorized' });
         }
     } catch (err) {

@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const db = require("../model/helper");
+const { ensureTeacher } = require('../middleware/guards');
 
 // http://localhost:5000/items 
 // feth from /items
@@ -18,7 +19,7 @@ router.get('/', async function(req, res, next){
 
 
 // ADD (POST) NEW ITEMS TO EXISTING EXERCISE, linked by foreign key, exerciseID  
-router.post('/', async function(req,res,next){
+router.post('/', ensureTeacher, async function(req,res,next){
     let { seq, sentence, options, answer, explanation, exerciseID } = req.body;
     
     try{
