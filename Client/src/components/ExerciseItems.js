@@ -106,9 +106,9 @@ return (
           
             <ol>
             {
-               exercise && exercise.items.map(item => (<div>
+               exercise && exercise.items.map(item => (
                     <li className="mb-2 mr-2" key={item.id}>{buildSentence(item)}</li>
-                    </div>
+                    
                 ))
             }
             </ol>
