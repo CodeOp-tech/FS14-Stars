@@ -7,7 +7,7 @@ function ExerciseItems(){
   const [showAnswer, setShowAnswer] = useState(false); 
 
   const getExercise = () => {
-  fetch("/exercises/2") 
+  fetch("/exercises/15") 
     .then(res => res.json())
     .then(json => {
          console.log(json);
@@ -107,7 +107,7 @@ return (
             <ol>
             {
                exercise && exercise.items.map(item => (
-                    <li className="mb-2 mr-2" key={item.id}>{buildSentence(item)}</li>
+                    <li className="mb-2" key={item.id}>{buildSentence(item)}</li>
                     
                 ))
             }
