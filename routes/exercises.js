@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 const db = require("../model/helper");
 
+
 // http://localhost:5000/exercises 
 // fetch from /exercises
 
@@ -107,8 +108,8 @@ router.get('/:id', ensureExerciseExists, async function(req, res) {
 router.post('/', async function(req, res) {
   let { category, title, level } = req.body;
   let sql = `
-      INSERT INTO exercises (category, title)
-      VALUES ('${ category }', '${ title }', ${level} )
+      INSERT INTO exercises (category, title, level)
+      VALUES ('${ category }', '${ title }', '${level}' )
   `;
 
   try {

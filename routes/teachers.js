@@ -3,6 +3,7 @@ var router = express.Router();
 const db = require("../model/helper");
 const bcrypt = require('bcrypt');
 const { BCRYPT_WORK_FACTOR } = require('../config');
+const { ensureSameUser } = require('../middleware/guards')
 
 // const jwt = require("jsonwebtoken"); // secret key for log in purposes... 
 // where to put log in? leave it here? or create a login page?
