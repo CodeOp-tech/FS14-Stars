@@ -1,12 +1,13 @@
 import React, {useState, useEffect} from "react";
+import "./ExerciseItems.css"
 
 function ExerciseItems(){
-  const [exercise, setExercise] = useState(null); 
+  const [exercise, setExercise] = useState({items: []}); 
   const [guesses, setGuesses] = useState({});
   const [showAnswer, setShowAnswer] = useState(false); 
 
   const getExercise = () => {
-  fetch("/exercises/5") 
+  fetch("/exercises/2") 
     .then(res => res.json())
     .then(json => {
          console.log(json);
@@ -101,18 +102,17 @@ return (
         </div>
         <div className="card">
         <form onSubmit={handleSubmit}>
-        <table>
-            <tbody>
+       
           
             <ol>
             {
-                exercise && exercise.items.map(item => (
-                    <li className="mb-2 mr-2" key={item.id}>{buildSentence(item)}<br/></li>
+               exercise && exercise.items.map(item => (<div>
+                    <li className="mb-2 mr-2" key={item.id}>{buildSentence(item)}</li>
+                    </div>
                 ))
             }
             </ol>
-            </tbody>
-          </table>
+           
         
             <button type="submit" className="btn btn-primary">Get Answers</button>
         </form>
