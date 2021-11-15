@@ -50,40 +50,24 @@ function ensureSameUser(req, res, next) {
     }
 }
 
-function ensureStudent(req, res, next) {
-    let token = _getToken(req);
-
-    try {
-    // Throws error on invalid/missing token
-    let payload = jwt.verify(token, SECRET_KEY);
-    // If we get here, a valid token was passed
-    if (payload.userType === 'student') {
-        next();
-    } else {
-        res.status(401).send({ error: 'Unauthorized' });
-    }
-} catch (err) {
-    res.status(401).send({ error: 'Unauthorized' });
-}
-}
-
-
 function ensureTeacher(req, res, next) {
     let token = _getToken(req);
 
     try {
-    // Throws error on invalid/missing token
-    let payload = jwt.verify(token, SECRET_KEY);
-    // If we get here, a valid token was passed
-    if (payload.userType === 'teacher') {
-        next();
-    } else {
+        // Throws error on invalid/missing token
+        let payload = jwt.verify(token, SECRET_KEY);
+        // If we get here, a valid token was passed
+        if (payload.userType === "teacher") {
+            next();
+        } else {
+            res.status(401).send({ error: 'Unauthorized' });
+        }
+    } catch (err) {
         res.status(401).send({ error: 'Unauthorized' });
     }
-} catch (err) {
-    res.status(401).send({ error: 'Unauthorized' });
 }
-}
+
+
 
 
 /**
@@ -108,6 +92,5 @@ function _getToken(req) {
 module.exports = {
     ensureUserLoggedIn,
     ensureSameUser,
-    ensureStudent,
     ensureTeacher
 };
