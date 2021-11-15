@@ -1,12 +1,13 @@
 import React, {useState, useEffect} from "react";
+import "./ExerciseItems.css"
 
 function ExerciseItems(){
-  const [exercise, setExercise] = useState(null); 
+  const [exercise, setExercise] = useState({items: []}); 
   const [guesses, setGuesses] = useState({});
   const [showAnswer, setShowAnswer] = useState(false); 
 
   const getExercise = () => {
-  fetch("/exercises/3") 
+  fetch("/exercises/15") 
     .then(res => res.json())
     .then(json => {
          console.log(json);
@@ -60,19 +61,23 @@ function buildSentence(item) {
 
     //select required, requires them to fill in all elements in the form required
     let sentence = (
-        <div className="sentence"> 
+      <tr> 
+        <td className="sentence">
             {parts[0]}
             <select id={'ex-'+item.id} name={item.id} onChange={handleChange} >
                 <option value="">choose one...</option>
                 {optArr}
             </select>
             {parts[1]}
+            </td>
+            <td>
             <div className="showAnswer">
           {
             showAnswer && buildAnswer(item)
           }
             </div>
-        </div>
+            </td>
+        </tr>
     );
   
     return sentence;
@@ -97,14 +102,17 @@ return (
         </div>
         <div className="card">
         <form onSubmit={handleSubmit}>
+       
           
             <ol>
             {
-                exercise && exercise.items.map(item => (
-                    <li className="mb-2" key={item.id}>{buildSentence(item)}<br/></li>
+               exercise && exercise.items.map(item => (
+                    <li className="mb-2" key={item.id}>{buildSentence(item)}</li>
+                    
                 ))
             }
             </ol>
+           
         
             <button type="submit" className="btn btn-primary">Get Answers</button>
         </form>
