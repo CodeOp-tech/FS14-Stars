@@ -57,7 +57,7 @@ router.get('/:userId', ensureSameUser, async function(req, res, next) {
           let passwordsEqual = await bcrypt.compare(password, user.password);
           if (passwordsEqual) {
               // Passwords match
-              let payload = { userId: user.id };
+              let payload = { userId: user.id, userType: user.type };
               // Create token containing user ID
               let token = jwt.sign(payload, SECRET_KEY);
               // Also return user (without password)
