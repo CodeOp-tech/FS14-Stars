@@ -3,7 +3,7 @@ var router = express.Router();
 const db = require("../model/helper");
 const bcrypt = require('bcrypt');
 const { BCRYPT_WORK_FACTOR } = require('../config');
-const { ensureSameUser } = require('../middleware/guards');
+const { ensureSameUser, ensureStudent } = require('../middleware/guards');
 
 
 
@@ -117,19 +117,16 @@ router.get('/', async function(req, res, next){
 
 
 // GET student by ID
-router.get('/:userId', ensureSameUser, async function(req, res) {
+router.get('/:userId', ensureStudent, ensureSameUser, async function(req, res) {
   try {
       // Get student; we know it exists, thanks to guard
       // Use LEFT JOIN to also return user details
-      // Use LEFT JOIN to also return student scores
       // students as st, scores as sc
       let sql = `
-          SELECT students.*, u.*, scores.*, e.*, students.id AS studentId, u.id AS userId, scores.id AS scoreId, e.id as exerciseId
-          FROM students AS students 
-          LEFT JOIN users AS u ON students.userID = u.id
-          LEFT JOIN scores AS scores ON students.Id = scores.studentID
-          LEFT JOIN exercises AS e ON scores.exerciseID = e.id 
-          WHERE students.userID = ${req.params.userId}
+          SELECT st.*, u.*, st.id AS studentId, u.id AS userId
+          FROM students AS st 
+          LEFT JOIN users AS u ON st.userID = u.id 
+          WHERE st.userID = ${req.params.userId}
       `;
 
       let results = await db(sql);
@@ -143,16 +140,16 @@ router.get('/:userId', ensureSameUser, async function(req, res) {
 });
 
 // GET student scores by ID
-router.get('/:id/scores', ensureStudentExists, async function(req, res) {
+router.get('/:userId/scores', ensureStudent, ensureSameUser, ensureStudentExists, async function(req, res) {
   try {
       // Get student; we know it exists, thanks to guard
       // Use LEFT JOIN to return exercises
       // Use LEFT JOIN to also return student scores
       let sql = `
-          SELECT scores.*, e.*, scores.id AS scoreId, e.id as exerciseId
-          FROM scores AS scores
-          LEFT JOIN exercises AS e ON scores.exerciseID = e.id 
-          WHERE scores.studentID = ${req.params.id}
+          SELECT sc.*, e.*, sc.id AS scoreId, e.id as exerciseId
+          FROM scores AS sc
+          LEFT JOIN exercises AS e ON sc.exerciseID = e.id 
+          WHERE scores.studentID = ${req.params.userId}
       `;
 
       let results = await db(sql);
