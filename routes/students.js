@@ -3,6 +3,8 @@ var router = express.Router();
 const db = require("../model/helper");
 const bcrypt = require('bcrypt');
 const { BCRYPT_WORK_FACTOR } = require('../config');
+const { ensureSameUser } = require('../middleware/guards');
+
 
 
 // http://localhost:5000/students
@@ -15,7 +17,7 @@ const { BCRYPT_WORK_FACTOR } = require('../config');
 
  async function ensureStudentExists(req, res, next) {
   try {
-      let results = await db(`SELECT * FROM students WHERE id = ${req.params.id}`);
+      let results = await db(`SELECT * FROM students WHERE userID = ${req.params.userId}`);
       if (results.data.length === 1) {
           // Student was found; let next middleware function run
           next();
@@ -115,18 +117,19 @@ router.get('/', async function(req, res, next){
 
 
 // GET student by ID
-router.get('/:id', ensureStudentExists, async function(req, res) {
+router.get('/:userId', ensureSameUser, async function(req, res) {
   try {
       // Get student; we know it exists, thanks to guard
       // Use LEFT JOIN to also return user details
       // Use LEFT JOIN to also return student scores
+      // students as st, scores as sc
       let sql = `
           SELECT students.*, u.*, scores.*, e.*, students.id AS studentId, u.id AS userId, scores.id AS scoreId, e.id as exerciseId
-          FROM students AS students
+          FROM students AS students 
           LEFT JOIN users AS u ON students.userID = u.id
           LEFT JOIN scores AS scores ON students.Id = scores.studentID
           LEFT JOIN exercises AS e ON scores.exerciseID = e.id 
-          WHERE students.id = ${req.params.id}
+          WHERE students.userID = ${req.params.userId}
       `;
 
       let results = await db(sql);
