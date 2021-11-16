@@ -31,3 +31,6 @@ setExercise((prevEx) => [...prevEx, newEx]);
 export default RebeccaGView;
 
 //i can get rid of exerciseitems and replace with teachersexercises when im ready to test it 
+
+
+

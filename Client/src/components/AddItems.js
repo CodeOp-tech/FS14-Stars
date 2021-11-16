@@ -12,7 +12,7 @@ function AddExercise () {
 //options
 //answer 
 //submit button they press for every sentence they want to add to the database 
-//then when finish just exit
+//then when finish just exit the page 
 
 
 
