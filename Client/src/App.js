@@ -77,8 +77,9 @@ const getUsers = () => {
                   users={users} addUserCb={name => addUser(name)} />
     
       </div>
-
+      )
 }
+
 export default App;
 
 
