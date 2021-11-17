@@ -35,10 +35,11 @@ import { useState } from 'react';
 //     )
 // }
 function TeachersList(props) {
-  let [teachers, setTeachers] = useState([]);
-  return <div className="TeachersList">
-    <ul>
-    {
+  const [teachers, setTeachers] = useState([]);
+  return (
+  <div className="TeachersList">
+     <ul>
+     {
       props.teachers.map(teacher => (
         <li key={teacher.id}>
           {teacher.username}, {teacher.qualifications}, {teacher.experience} 
@@ -53,7 +54,8 @@ function TeachersList(props) {
       ))
     }
     </ul>
-  </div>;
-}
+  </div>
+  )
+};
 
 export default TeachersList;
