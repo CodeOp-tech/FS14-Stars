@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import { useState } from 'react';
 // import { useEffect, useState } from "react";
 // import { useHistory } from "react-router-dom";
 
@@ -34,9 +35,11 @@ import React from 'react'
 //     )
 // }
 function TeachersList(props) {
-  return <div className="TeachersList">
-    <ul>
-    {
+  const [teachers, setTeachers] = useState([]);
+  return (
+  <div className="TeachersList">
+     <ul>
+     {
       props.teachers.map(teacher => (
         <li key={teacher.id}>
           {teacher.username}, {teacher.qualifications}, {teacher.experience} 
@@ -51,7 +54,8 @@ function TeachersList(props) {
       ))
     }
     </ul>
-  </div>;
-}
+  </div>
+  )
+};
 
 export default TeachersList;
