@@ -34,7 +34,7 @@ return (
 
                 {/* IngaB View */}
                <Route path="/ingabview">
-                    <IngaBView />
+                    <IngaBView submitCb = {InitialUsers => props.submitCb(InitialUsers)}/>
                </Route>
 
                {/* RebeccaG View */}

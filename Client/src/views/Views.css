@@ -1,18 +1,23 @@
 h3, h2, p {
     margin-left: 5%;
 }
+
 h4 {
     margin-left: 6%;
+    
 }
+
 .container {
     display: block;
     width: 90%;
     padding: 5px;
-    background-color: #F1EBDE;
+    background-color: #f1ebde;
 }
+
 .form-group {
     margin-left: 6%;
 }
+
 .radio {
     margin-left: 3%;  
     float: left;
