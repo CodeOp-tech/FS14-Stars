@@ -38,7 +38,7 @@ function StudentScores(props) {
     return <div className="StudentScores">
         <h2>Exercise Scores for (fix this)</h2>
 
-        <table className="table text-start">
+        <table className="table table-sm text-start">
             <thead>
                 <tr>
                     <th>Date</th>
