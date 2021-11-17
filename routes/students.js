@@ -149,7 +149,10 @@ router.get('/:userId/scores', ensureStudent, ensureSameUser, ensureStudentExists
           SELECT sc.*, e.*, sc.id AS scoreId, e.id as exerciseId
           FROM scores AS sc
           LEFT JOIN exercises AS e ON sc.exerciseID = e.id 
-          WHERE scores.studentID = ${req.params.userId}
+          LEFT JOIN students AS st ON sc.studentID = st.id
+          LEFT JOIN users AS u ON st.userID = u.id
+          WHERE u.id = ${req.params.userId}
+          ORDER BY sc.date_time DESC
       `;
 
       let results = await db(sql);

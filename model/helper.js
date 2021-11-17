@@ -17,7 +17,8 @@ module.exports = async function db(query) {
       user: DB_USER || "root",
       password: DB_PASS,
       database: DB_NAME || "teachme",
-      multipleStatements: true
+      multipleStatements: true,
+      dateStrings: true  // Added by Jim
     });
 
     con.connect(function(err) {
