@@ -1,18 +1,15 @@
-import { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
-import "./App.css";
-
-import Local from './helpers/Local';
-import Api from './helpers/Api';
-
-
-import Navbar from './components/Navbar';
-import Routes from './components/Routes';
-
+ import { useEffect, useState } from "react";
+ import { useHistory } from "react-router-dom";
+ import "./App.css";
+ import Local from './helpers/Local';
+ import Api from './helpers/Api';
+ import Navbar from './components/Navbar';
+ import Routes from './components/Routes';
 
 
 function App() {
   const [user, setUser] = useState(Local.getUser());
+  let [users, setUsers] = useState([]);
   const [loginErrorMsg, setLoginErrorMsg] = useState('');
   const history = useHistory();
 
@@ -36,10 +33,12 @@ function doLogout() {
   setUser(null);
   history.push('/');
 }
+  
+    // useEffect(() => {
+    //   getUsers("students");
+    //  }, []);
 
-
-
-function addUser(newUser) {
+function addUser(newVisitor) {
   // add new user to database
   fetch('/teachme', {
     method: "POST",
@@ -55,6 +54,7 @@ function addUser(newUser) {
     // Redirect to /users
     history.push('/teachme');
 }
+
 const getUsers = () => {
   fetch('/students')
     .then(response => response.json())

@@ -3,7 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 
 
 import HomeView from '../components/HomeView';
-import SignupForm from '../components/SignupForm';
+import SignUpFormI from './SignUpFormI';
 import DeniseBView from '../views/DeniseBView';
 import IngaBView from '../views/IngaBView';
 import RebeccaGView from '../views/RebeccaGView';
@@ -24,7 +24,7 @@ return (
 
                 {/* Signup Form */}
                <Route path="/signupform">
-                    <SignupForm  />
+                    <SignUpFormI  />
                </Route>
                 
                 {/* DeniseB View */}
@@ -48,6 +48,11 @@ return (
                     loginCb={(u, p) => props.loginCb(u, p)} 
                     loginError={props.loginError} 
                 />
+               </Route>
+
+               {/* Exercise List */}
+               <Route path="/exerciselist">
+                    <ExerciseList />
                </Route>
 
                {/* None of the routes matched: Error 404! */}
