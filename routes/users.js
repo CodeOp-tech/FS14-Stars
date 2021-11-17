@@ -19,7 +19,7 @@ router.get('/', async function(req, res, next){
   try {
     let results = await db("SELECT * FROM users;");
     let users = results.data;
-    //users.forEach(u => {delete u.password && delete u.email});  // don't return the passwords and emails
+    users.forEach(u => {delete u.password && delete u.email});  // don't return the passwords and emails
     res.send(users);
   } catch (err) {
     next(err);
@@ -33,7 +33,7 @@ router.get('/:userId', ensureSameUser, async function(req, res, next) {
   try {
       let results = await db(sql);
       let user = results.data[0];
-      //delete user.password;  // don't return the password
+      delete user.password;  // don't return the password
       res.send(user);
   } catch (err) {
       next(err);
@@ -49,6 +49,7 @@ router.get('/:userId', ensureSameUser, async function(req, res, next) {
 
   try {
       let results = await db(`SELECT * FROM users WHERE username = '${username}'`);
+
       if (results.data.length === 0) {
           // Username not found
           res.status(401).send({ error: 'Login failed' });

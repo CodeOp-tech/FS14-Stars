@@ -3,7 +3,7 @@ var router = express.Router();
 const db = require("../model/helper");
 const bcrypt = require('bcrypt');
 const { BCRYPT_WORK_FACTOR } = require('../config');
-const { ensureSameUser } = require('../middleware/guards')
+const { ensureSameUser, ensureTeacher } = require('../middleware/guards');
 
 // const jwt = require("jsonwebtoken"); // secret key for log in purposes... 
 // where to put log in? leave it here? or create a login page?
@@ -86,7 +86,7 @@ router.get('/', async function(req, res, next){
   });
 
 // GET teacher by ID
-router.get('/:id', ensureTeacherExists, async function(req, res) {
+router.get('/:userId', ensureTeacher, ensureSameUser, async function(req, res) {
   try {
       // Get teacher; we know it exists, thanks to guard
       // Use LEFT JOIN to also return user details
@@ -94,7 +94,7 @@ router.get('/:id', ensureTeacherExists, async function(req, res) {
           SELECT t.*, u.*, t.id AS teacherId, u.id AS userId
           FROM teachers AS t
           LEFT JOIN users AS u ON t.userID = u.id
-          WHERE t.id = ${req.params.id}
+          WHERE t.userID = ${req.params.userId}
       `;
 
       let results = await db(sql);

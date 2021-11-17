@@ -7,11 +7,11 @@ import SignupForm from '../components/SignupForm';
 import DeniseBView from '../views/DeniseBView';
 import IngaBView from '../views/IngaBView';
 import RebeccaGView from '../views/RebeccaGView';
-import ShandyRView from '../views/ShandyRView';
+import LogInView from '../views/LogInView';
 import Error404View from '../components/Error404View';
 
 
-function Routes() {
+function Routes(props) {
 return (
      
      <Switch> 
@@ -41,9 +41,12 @@ return (
                     <RebeccaGView />
                </Route>
 
-               {/* ShandyR View */}
-               <Route path="/shandyrview">
-                    <ShandyRView />
+               {/* Changed to LogInView */}
+               <Route path="/login">
+               <LogInView 
+                    loginCb={(u, p) => props.loginCb(u, p)} 
+                    loginError={props.loginError} 
+                />
                </Route>
 
                {/* None of the routes matched: Error 404! */}
