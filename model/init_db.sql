@@ -226,8 +226,9 @@ INSERT INTO items (seq, sentence, options, answer, explanation, exerciseID)
                
 
 -- initial SCORES table
-INSERT INTO scores (studentID, exerciseID, score)
-    VALUES (1, 1, 100),
-           (1, 2, 30),
-           (2, 1, 80),
-           (2, 3, 70);
+INSERT INTO scores (studentID, exerciseID, score, date_time)
+    VALUES (1, 1, 100, '2021-01-10 14:30'),
+           (1, 2, 30, '2021-02-01 12:05'),
+           (1, 3, 50, '2021-04-18 18:00'),
+           (2, 1, 80, '2021-08-10 12:20'),
+           (2, 3, 70, '2021-08-20 15:30');

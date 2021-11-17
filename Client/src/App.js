@@ -67,17 +67,17 @@ const getUsers = () => {
     });
   }
 
-    return (
-        <div className="App">
-          <h1>Teach Me</h1>
+  return (
+      <div className="App">
+        <h1>Teach Me</h1>
 
-            <Navbar user={user} logoutCb={doLogout}/>
-            <Routes users={users} 
-                    addUserCb={name => addUser(name)} 
-                    loginCb={(u, p) => doLogin(u, p)}
-                    loginError={loginErrorMsg}/>
-        </div>
-    )
+          <Navbar user={user} logoutCb={doLogout}/>
+          <Routes loginCb={(u, p) => doLogin(u, p)}
+                  loginError={loginErrorMsg}
+                  users={users} addUserCb={name => addUser(name)} />
+    
+      </div>
+      )
 }
 
 export default App;

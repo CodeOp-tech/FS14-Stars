@@ -1,13 +1,20 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect } from "react";
+import { useParams } from 'react-router-dom';
 import "./ExerciseItems.css"
 
-function ExerciseItems(){
+function ExerciseItems(props){
   const [exercise, setExercise] = useState({items: []}); 
   const [guesses, setGuesses] = useState({});
   const [showAnswer, setShowAnswer] = useState(false); 
+  let { id } = useParams();
+
+  // Default ID in case none is provided
+  if (!id) {
+    id = 9;
+  }
 
   const getExercise = () => {
-  fetch("/exercises/9") 
+  fetch(`/exercises/${id}`) 
     .then(res => res.json())
     .then(json => {
          console.log(json);

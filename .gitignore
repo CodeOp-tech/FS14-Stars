@@ -2,3 +2,4 @@
 /dist
 .env
 /client/node_modules
+.jpg
