@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import { useState } from 'react';
 // import { useEffect, useState } from "react";
 // import { useHistory } from "react-router-dom";
 
@@ -34,6 +35,7 @@ import React from 'react'
 //     )
 // }
 function TeachersList(props) {
+  let [teachers, setTeachers] = useState([]);
   return <div className="TeachersList">
     <ul>
     {
