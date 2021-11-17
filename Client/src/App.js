@@ -1,34 +1,10 @@
  import { useEffect, useState } from "react";
  import { useHistory } from "react-router-dom";
  import "./App.css";
- 
-
-<<<<<<< Updated upstream
-import Local from './helpers/Local';
-import Api from './helpers/Api';
-||||||| constructed merge base
-
-
-=======
-
-
+ import Local from './helpers/Local';
+ import Api from './helpers/Api';
  import Navbar from './components/Navbar';
  import Routes from './components/Routes';
->>>>>>> Stashed changes
-
-// function RebeccaGView () {
-//   return (
-//       <div>
-//           <h2>Rebecca G</h2>
-
-
-//         <Navbar />
-//         <Routes />
-//       </div>
-//   )
-// }
-
-// export default RebeccaGView;
 
 
 function App() {
