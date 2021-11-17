@@ -1,31 +1,33 @@
 import React, { useEffect, useState } from 'react';
-import Api from './../helpers/Api';
+import Api from '../helpers/Api';
+import Local from '../helpers/Local';
 
 
-// Requires: userId
 function StudentScores(props) {
     const [scores, setScores] = useState([]);
+    let user = Local.getUser();  // get the logged in user/student
 
     useEffect(() => {
-        getScores(props.userId);
+        getScores();
     }, []);
 
     // Make all exercise info available in the corresponding score
-    // Also reverse the dates to be dd-mm-yyyy format
+    // Also reverse the dates to be dd.mm.yyyy format and remove seconds
     function mergeThem(exercises, scores) {
         for (let i=0; i<scores.length; i++) {
             scores[i].exercise = exercises.find(e => e.id === scores[i].exerciseID);
 
             let [ d, t ] = scores[i].date_time.split(' ');
-            d = d.split('-').reverse().join('.');
+            d = d.split('-').reverse().join('.');  // switch yyyy-mm-dd to dd.mm.yyyy
+            t = t.replace(/:\d\d$/, '');  // remove seconds
             scores[i].date_time = d + ' ' + t;
         }
 
         return scores;
     }
 
-    async function getScores(userId) {
-        let response = await Api.getScores(userId);
+    async function getScores() {
+        let response = await Api.getScores(user.id);
         if (response.ok) {
             let { exercises, scores } = response.data;
             scores = mergeThem(exercises, scores);
@@ -36,7 +38,7 @@ function StudentScores(props) {
     }
 
     return <div className="StudentScores">
-        <h2>Exercise Scores for (fix this)</h2>
+        <h2>Exercise Scores for User {user.username}</h2>
 
         <table className="table table-sm text-start">
             <thead>

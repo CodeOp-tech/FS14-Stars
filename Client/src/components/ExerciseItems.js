@@ -1,14 +1,18 @@
 import React, {useState, useEffect } from "react";
 import { useParams } from 'react-router-dom';
 import "./ExerciseItems.css"
+import Api from '../helpers/Api';
+import Local from '../helpers/Local';
+
 
 function ExerciseItems(props){
   const [exercise, setExercise] = useState({items: []}); 
   const [guesses, setGuesses] = useState({});
   const [showAnswer, setShowAnswer] = useState(false); 
+  const [score, setScore] = useState(-1);
   let { id } = useParams();
 
-  // Default ID in case none is provided
+  // Default ID in case none is provided; TEMPORARY
   if (!id) {
     id = 9;
   }
@@ -17,26 +21,37 @@ function ExerciseItems(props){
   fetch(`/exercises/${id}`) 
     .then(res => res.json())
     .then(json => {
-         console.log(json);
        setExercise(json);
     })
     .catch((err) => console.log(err));
 
   }
-useEffect(() => {
-getExercise();
-}, []);
 
+  useEffect(() => {
+    getExercise();
+  }, []);
+
+  // Compute the score and POST it to the server
+  async function postScore() {
+    let score = 0;
+    for (let item of exercise.items) {
+      if (item.answer === guesses[item.id]) {
+        score += 10;
+      }
+    }
+    setScore(score);
+    Api.postScore(Local.getUserId(), exercise.id, score);
+  }
 
 function handleSubmit(e){
     e.preventDefault(e);
     showFunction()
+    postScore();
 };
 
 function handleChange(e){
-    setGuesses({ ...guesses, [e.target.name]: e.target.value});
-    console.log(guesses)
-//saves the changed menu value into the guesses obj 
+  //saves the changed menu value into the guesses obj 
+  setGuesses({ ...guesses, [e.target.name]: e.target.value});
 }
 
 const showFunction = (showAnswer) => {
@@ -44,7 +59,6 @@ const showFunction = (showAnswer) => {
 } 
 
 function buildAnswer(item){
-    console.log(guesses[item.id]);
     if (item.answer === guesses[item.id]){
       return "Correct!"
     } else {
@@ -112,8 +126,6 @@ return (
         </div>
         <div className="card">
         <form onSubmit={handleSubmit}>
-       
-          
             <ol>
             {
                exercise && exercise.items.map(item => (
@@ -123,9 +135,16 @@ return (
             }
             </ol>
            
-        
-            <button type="submit" className="btn btn-primary">Get Answers</button>
+          <button type="submit" className="btn btn-primary">Get Answers</button>
         </form>
+
+        {
+          score >= 0 && (
+            <div className="text-center p-3">
+              <h3 className="ms-0">Your Score: {score}</h3>
+            </div>
+          )
+        }
         </div>
     </div>
   </div>
