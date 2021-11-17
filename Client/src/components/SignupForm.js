@@ -12,7 +12,8 @@ function handleChange(event) {
 function handleSubmit(event) {
   event.preventDefault();
   props.submitCb(userName);
-  setUsername(''); 
+  setUsername('');
+  console.log("handleSubmit") 
 }
 
 return (
@@ -22,7 +23,7 @@ return (
      <Row className="mb-3">
          <Form.Group className="mb-3" controlId="formGridAddress1">
          <Form.Label>Your Name</Form.Label>
-         <Form.Control placeholder="Insert your name..."  onChange={handleChange} required/>
+         <Form.Control name="userName" value={userName} placeholder="Insert your name..."  onChange={handleChange} required/>
          </Form.Group>
 
          <Form.Group as={Col} controlId="formGridEmail">
@@ -47,7 +48,7 @@ return (
 
    
     
-  <Button variant="primary" type="submit" onClick={handleSubmit}>
+  <Button variant="primary" type="submit">
     Submit
   </Button>
 </Form>
