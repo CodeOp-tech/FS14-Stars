@@ -1,14 +1,10 @@
-import { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
-import "./App.css";
-
-import Local from './helpers/Local';
-import Api from './helpers/Api';
-
-
-import Navbar from './components/Navbar';
-import Routes from './components/Routes';
-
+ import { useEffect, useState } from "react";
+ import { useHistory } from "react-router-dom";
+ import "./App.css";
+ import Local from './helpers/Local';
+ import Api from './helpers/Api';
+ import Navbar from './components/Navbar';
+ import Routes from './components/Routes';
 
 
 function App() {
@@ -37,9 +33,14 @@ function doLogout() {
   history.push('/');
 }
 
+  let [users, setUsers] = useState([]);
+    const history = useHistory();
+  
+    useEffect(() => {
+      getUsers("students");
+     }, []);
 
-
-function addUser(newUser) {
+function addUser(newVisitor) {
   // add new user to database
   fetch('/teachme', {
     method: "POST",
@@ -55,6 +56,7 @@ function addUser(newUser) {
     // Redirect to /users
     history.push('/teachme');
 }
+
 const getUsers = () => {
   fetch('/students')
     .then(response => response.json())
@@ -67,18 +69,19 @@ const getUsers = () => {
     });
   }
 
-  return (
-      <div className="App">
-        <h1>Teach Me</h1>
+    return (
+        <div className="App">
+          <h1>Teach Me</h1>
 
-          <Navbar user={user} logoutCb={doLogout}/>
-          <Routes loginCb={(u, p) => doLogin(u, p)}
-                  loginError={loginErrorMsg}
-                  users={users} addUserCb={name => addUser(name)} />
-    
-      </div>
-
+            <Navbar user={user} logoutCb={doLogout}/>
+            <Routes users={users} 
+                    addUserCb={name => addUser(name)} 
+                    loginCb={(u, p) => doLogin(u, p)}
+                    loginError={loginErrorMsg}/>
+        </div>
+    )
 }
+
 export default App;
 
 

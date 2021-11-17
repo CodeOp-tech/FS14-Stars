@@ -50,6 +50,11 @@ return (
                 />
                </Route>
 
+               {/* Exercise List */}
+               <Route path="/exerciselist">
+                    <ExerciseList />
+               </Route>
+
                {/* None of the routes matched: Error 404! */}
                <Route path="/exerciselist">
                     <ExerciseList />
