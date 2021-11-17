@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Row, Form, Button, Col, FloatingLabel, Dropdown } from 'react-bootstrap';
-import './Views.css';
+import '../views/Views.css';
 
 let emptyForm = {
-  userName: "",
+  username: "",
   userType: "",
   password: "",
   email: "",
@@ -11,23 +11,30 @@ let emptyForm = {
   qualifications: "",
   level: "",
 };
-
-  function SignupForm(props) {
+  function SignUpFormI(props) {
   const [formData, setFormData] = useState(emptyForm);
+
   function handleChange(event) {
   let {name, value} = event.target
-  setFormData(FormData => ({...FormData, [name]: value}))
+  setFormData(formData => ({...formData, [name]: value}))
   }  
 
     function handleSubmit(event) {
     event.preventDefault();
-    props.submitCb(formData);
-  }
+    if (formData.userType === "student") {
+        props.submitStudentCb(formData);
+    }else{
+        props.submitTeacherCb(formData);
+    }
+   }
 
   function handleTypeClick(event) {
     let newUserType = event.target.value;
-    console.log(newUserType);
-    setFormData(FormData => ({...FormData, userType: newUserType}))
+    // console.log(newUserType);
+    setFormData(formData => ({
+        ...formData, 
+        userType: newUserType
+    }))
   }
   
   return (
@@ -35,25 +42,34 @@ let emptyForm = {
      <div className="AddNewUser">
       <h2>New Account Registration</h2>
       <Form onSubmit={handleSubmit}>
-          <Form.Group className="mb-3" controlId="formGroupUserName"
-          value={formData.userName} onChange={handleChange} required
+          <Form.Group className="mb-3" controlId="formGroupUsername" 
+           
           style={{ width: '30%', height: '100%' }}>
           <Form.Label>User name</Form.Label>
-          <Form.Control type="text"
+          <Form.Control type="text" 
+          name="username"
+          value={formData.username} onChange={handleChange} required
           placeholder="Insert your name..." />
           </Form.Group>
-          <Form.Group className="mb-3" controlId="formGroupEmail"
-          value={formData.email} onChange={handleChange} required
+
+          <Form.Group className="mb-3" controlId="formGroupEmail" 
           style={{ width: '30%', height: '100%' }}>
           <Form.Label>Email address</Form.Label>
-          <Form.Control type="email" placeholder="Enter email" />
+          <Form.Control type="email" 
+          name="email"
+          value={formData.email} onChange={handleChange} required
+          placeholder="Enter email" />
           </Form.Group>
-          <Form.Group className="mb-3" controlId="formGroupPassword"
-          value={formData.password} name="password" onChange={handleChange} required
+
+          <Form.Group className="mb-3" controlId="formGroupPassword" 
           style={{ width: '30%', height: '100%' }}>
           <Form.Label>Password</Form.Label>
-          <Form.Control type="password" placeholder="Password" />
+          <Form.Control type="password" 
+          name="password" 
+          value={formData.password} onChange={handleChange} required
+          placeholder="Password" />
           </Form.Group>
+      
         {/* <Row className="mb-3">
              <Form.Group className="mb-3" controlId="formGridAddress1" style={{ width: '30%', height: '100%' }}>
              <Form.Label>Username</Form.Label>
@@ -113,5 +129,4 @@ let emptyForm = {
   </div>
   </div>
   )}
-
-export default SignupForm;
+export default SignUpFormI;

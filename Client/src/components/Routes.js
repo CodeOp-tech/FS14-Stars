@@ -8,9 +8,9 @@ import DeniseBView from '../views/DeniseBView';
 import IngaBView from '../views/IngaBView';
 import RebeccaGView from '../views/RebeccaGView';
 import LogInView from '../views/LogInView';
-import ExerciseList from '../components/ExerciseList';
-import Error404View from '../components/Error404View';
-
+import ExerciseList from '../views/ExerciseList';
+import UsersList from '../views/UsersList';
+import TeachersList from '../views/TeachersList';
 
 function Routes(props) {
 return (
@@ -34,7 +34,7 @@ return (
 
                 {/* IngaB View */}
                <Route path="/ingabview">
-                    <IngaBView />
+                    <IngaBView submitCb = {InitialUsers => props.submitCb(InitialUsers)}/>
                </Route>
 
                {/* RebeccaG View */}
@@ -56,7 +56,17 @@ return (
                </Route>
 
                {/* None of the routes matched: Error 404! */}
-               <Error404View />
+               <Route path="/exerciselist">
+                    <ExerciseList />
+               </Route>
+
+               <Route path="/userslist">
+                    <UsersList />
+               </Route>
+
+               <Route path="/teacherslist">
+                    <TeachersList />
+               </Route>
                
         </Switch>
         

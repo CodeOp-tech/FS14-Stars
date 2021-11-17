@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
-// import { View, Text } from 'react-native'
 import ExerciseItems from '../components/ExerciseItems.js';
+// import { View, Text } from 'react-native'
+
 
 
 

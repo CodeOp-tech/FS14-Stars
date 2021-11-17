@@ -7,7 +7,7 @@ function ExerciseItems(){
   const [showAnswer, setShowAnswer] = useState(false); 
 
   const getExercise = () => {
-  fetch("/exercises/15") 
+  fetch("/exercises/9") 
     .then(res => res.json())
     .then(json => {
          console.log(json);
@@ -72,9 +72,11 @@ function buildSentence(item) {
             </td>
             <td>
             <div className="showAnswer">
+              
           {
             showAnswer && buildAnswer(item)
           }
+          
             </div>
             </td>
         </tr>
@@ -93,10 +95,11 @@ return (
        
        <div className="card">
         <div className="card-header" style={{backgroundColor: "#cce6ff"}}>
-            <h1>Prepositions</h1>
+        <h2>{exercise.title}</h2>
+            
         </div>
         <div className="card-body">
-             <h4 className="card-title">Exercise One</h4>  
+             <h4 className="card-title">{exercise.level}</h4>  
         
         </div>
         </div>
@@ -107,7 +110,7 @@ return (
             <ol>
             {
                exercise && exercise.items.map(item => (
-                    <li className="mb-2" key={item.id}>{buildSentence(item)}</li>
+                    <li className="mr-2" key={item.id}>{buildSentence(item)}</li>
                     
                 ))
             }

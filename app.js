@@ -25,6 +25,11 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/exercises', exercisesRouter);
 app.use('/items', itemsRouter);
+<<<<<<< HEAD
+=======
+app.use('/users', usersRouter)
+
+>>>>>>> d3de03f26bb1576d2679de48641613688bd8eaac
 app.use('/teachers', teachersRouter);
 app.use('/students', studentsRouter);
 app.use('/scores', scoresRouter);
