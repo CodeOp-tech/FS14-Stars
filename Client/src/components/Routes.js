@@ -3,15 +3,16 @@ import { Route, Switch } from 'react-router-dom';
 
 
 import HomeView from '../components/HomeView';
-import SignupForm from '../components/SignupForm';
+import SignUpFormI from './SignUpFormI';
 import DeniseBView from '../views/DeniseBView';
 import IngaBView from '../views/IngaBView';
 import RebeccaGView from '../views/RebeccaGView';
-import ShandyRView from '../views/ShandyRView';
-import Error404View from '../components/Error404View';
+import LogInView from '../views/LogInView';
+import ExerciseList from '../views/ExerciseList';
+import UsersList from '../views/UsersList';
+import TeachersList from '../views/TeachersList';
 
-
-function Routes() {
+function Routes(props) {
 return (
      
      <Switch> 
@@ -22,8 +23,8 @@ return (
                </Route>
 
                 {/* Signup Form */}
-               <Route path="/signupform">
-                    <SignupForm  />
+               <Route path="/signup">
+                    <SignUpFormI  />
                </Route>
                 
                 {/* DeniseB View */}
@@ -33,21 +34,37 @@ return (
 
                 {/* IngaB View */}
                <Route path="/ingabview">
-                    <IngaBView />
+                    <IngaBView submitCb = {InitialUsers => props.submitCb(InitialUsers)}/>
                </Route>
 
-               {/* RebeccaG View */}
+               {/* RebeccaG View / Exercise View */}
+               <Route path="/rebeccagview/:id">
+                    <RebeccaGView />
+               </Route>
                <Route path="/rebeccagview">
                     <RebeccaGView />
                </Route>
 
-               {/* ShandyR View */}
-               <Route path="/shandyrview">
-                    <ShandyRView />
+               {/* Changed to LogInView */}
+               <Route path="/login">
+               <LogInView 
+                    loginCb={(u, p) => props.loginCb(u, p)} 
+                    loginError={props.loginError} 
+                />
                </Route>
 
-               {/* None of the routes matched: Error 404! */}
-               <Error404View />
+               {/* Exercise List */}
+               <Route path="/exerciselist">
+                    <ExerciseList />
+               </Route>
+
+               <Route path="/userslist">
+                    <UsersList />
+               </Route>
+
+               <Route path="/teacherslist">
+                    <TeachersList />
+               </Route>
                
         </Switch>
         

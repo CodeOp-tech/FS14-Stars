@@ -1,11 +1,16 @@
 import React from 'react'
-// import { View, Text } from 'react-native'
+import StudentScores from '../components/StudentScores';
+import ExerciseList from '../components/ExerciseList';
+
+
 
 
 function DeniseBView () {
     return (
-        <div className="DeniseBView">
-            <h2>Denise B</h2>
+        <div>
+            <StudentScores userId={3} />
+
+            <ExerciseList />
         </div>
     )
 }

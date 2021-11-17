@@ -1,6 +1,9 @@
 var express = require('express');
 var router = express.Router();
 const db = require("../model/helper");
+const { ensureTeacher } = require('../middleware/guards');
+
+
 
 // http://localhost:5000/exercises 
 // fetch from /exercises
@@ -45,7 +48,7 @@ function joinToJson(results) {
   if (row0.itemId) {
       items = results.data.map(i => ({
           id: i.itemId,
-          seq: i.sequence,
+          seq: i.seq,
           sentence: i.sentence,
           options: i.options,
           answer: i.answer,
@@ -104,11 +107,11 @@ router.get('/:id', ensureExerciseExists, async function(req, res) {
 });
 
 // POST a new exercise
-router.post('/', async function(req, res) {
+router.post('/', ensureTeacher, async function(req, res) {
   let { category, title, level } = req.body;
   let sql = `
-      INSERT INTO exercises (category, title)
-      VALUES ('${ category }', '${ title }', ${level} )
+      INSERT INTO exercises (category, title, level)
+      VALUES ('${ category }', '${ title }', '${level}' )
   `;
 
   try {
