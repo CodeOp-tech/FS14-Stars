@@ -9,6 +9,7 @@
 
 function App() {
   const [user, setUser] = useState(Local.getUser());
+  let [users, setUsers] = useState([]);
   const [loginErrorMsg, setLoginErrorMsg] = useState('');
   const history = useHistory();
 
@@ -32,13 +33,10 @@ function doLogout() {
   setUser(null);
   history.push('/');
 }
-
-  let [users, setUsers] = useState([]);
-    const history = useHistory();
   
-    useEffect(() => {
-      getUsers("students");
-     }, []);
+    // useEffect(() => {
+    //   getUsers("students");
+    //  }, []);
 
 function addUser(newVisitor) {
   // add new user to database
