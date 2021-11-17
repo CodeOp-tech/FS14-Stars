@@ -8,6 +8,7 @@ import DeniseBView from '../views/DeniseBView';
 import IngaBView from '../views/IngaBView';
 import RebeccaGView from '../views/RebeccaGView';
 import LogInView from '../views/LogInView';
+import ExerciseList from '../components/ExerciseList';
 import Error404View from '../components/Error404View';
 
 
@@ -47,6 +48,11 @@ return (
                     loginCb={(u, p) => props.loginCb(u, p)} 
                     loginError={props.loginError} 
                 />
+               </Route>
+
+               {/* Exercise List */}
+               <Route path="/exerciselist">
+                    <ExerciseList />
                </Route>
 
                {/* None of the routes matched: Error 404! */}

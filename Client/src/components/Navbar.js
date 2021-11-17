@@ -11,7 +11,8 @@ function Navbar() {
                    <li><NavLink to="/denisebview">DeniseB View</NavLink></li>
                    <li><NavLink to="/ingabview">IngaB View</NavLink></li>
                    <li><NavLink to="/rebeccagview">RebeccaG View</NavLink></li>
-                   <li><NavLink to="/login"> Log In </NavLink></li>
+                   <li><NavLink to="/login">Login</NavLink></li>
+                   <li><NavLink to="/exerciselist">ExerciseList</NavLink></li>
                    {/* <li><NavLink to="/error404">Error 404</NavLink></li> */}
                  </ul>
          </nav>

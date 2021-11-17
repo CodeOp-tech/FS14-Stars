@@ -1,14 +1,34 @@
-import { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
-import "./App.css";
+ import { useEffect, useState } from "react";
+ import { useHistory } from "react-router-dom";
+ import "./App.css";
+ 
 
+<<<<<<< Updated upstream
 import Local from './helpers/Local';
 import Api from './helpers/Api';
+||||||| constructed merge base
 
 
-import Navbar from './components/Navbar';
-import Routes from './components/Routes';
+=======
 
+
+ import Navbar from './components/Navbar';
+ import Routes from './components/Routes';
+>>>>>>> Stashed changes
+
+// function RebeccaGView () {
+//   return (
+//       <div>
+//           <h2>Rebecca G</h2>
+
+
+//         <Navbar />
+//         <Routes />
+//       </div>
+//   )
+// }
+
+// export default RebeccaGView;
 
 
 function App() {
@@ -37,25 +57,54 @@ function doLogout() {
   history.push('/');
 }
 
+  let [users, setUsers] = useState([]);
+    const history = useHistory();
+  
+    useEffect(() => {
+      getUsers("students");
+     }, []);
+
+function addUser(newVisitor) {
+  // add new user to database
+  fetch('/teachme', {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      },
+    body: JSON.stringify(users),
+  })
+    .then(response => response.json())
+    .then(users => {
+      setUsers(users);
+    })
+    // Redirect to /users
+    history.push('/teachme');
+}
+
+const getUsers = () => {
+  fetch('/students')
+    .then(response => response.json())
+    .then(users => {
+      console.log(users);
+      setUsers(users);
+    })
+    .catch(error => {
+      console.log(error);
+    });
+  }
+
     return (
         <div className="App">
           <h1>Teach Me</h1>
 
             <Navbar user={user} logoutCb={doLogout}/>
-            <Routes loginCb={(u, p) => doLogin(u, p)}
+            <Routes users={users} 
+                    addUserCb={name => addUser(name)} 
+                    loginCb={(u, p) => doLogin(u, p)}
                     loginError={loginErrorMsg}/>
-      
         </div>
     )
 }
 
 
 export default App;
-
-
-
-
-
-
-
-
