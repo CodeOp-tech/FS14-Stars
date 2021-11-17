@@ -23,7 +23,7 @@ return (
                </Route>
 
                 {/* Signup Form */}
-               <Route path="/signupform">
+               <Route path="/signup">
                     <SignUpFormI  />
                </Route>
                 
@@ -51,11 +51,6 @@ return (
                </Route>
 
                {/* Exercise List */}
-               <Route path="/exerciselist">
-                    <ExerciseList />
-               </Route>
-
-               {/* None of the routes matched: Error 404! */}
                <Route path="/exerciselist">
                     <ExerciseList />
                </Route>
