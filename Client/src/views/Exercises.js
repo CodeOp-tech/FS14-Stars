@@ -5,7 +5,7 @@ import ExerciseList from '../components/ExerciseList';
 
 
 
-function DeniseBView () {
+function Exercises () {
     return (
         <div>
             <StudentScores />
@@ -15,4 +15,4 @@ function DeniseBView () {
     )
 }
 
-export default DeniseBView;
+export default Exercises;

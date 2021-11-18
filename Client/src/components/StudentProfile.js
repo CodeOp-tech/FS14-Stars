@@ -1,4 +1,5 @@
 import React from "react";
+import StudentScores from './StudentScores';
 
 function StudentProfile(props) {
   let student = props.student;
@@ -7,6 +8,7 @@ function StudentProfile(props) {
     <div className="StudentProfile">
       <h2>{student.userName}</h2>
       <p>{student.currentLevel}</p>
+      <StudentScores />
     </div>
   );
 }

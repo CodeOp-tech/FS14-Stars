@@ -167,6 +167,7 @@ router.get('/:userId/scores', ensureStudent, ensureSameUser, ensureStudentExists
 
 // POST a new student
 router.post('/', async function(req, res) {
+  console.log(req.body)
   let { username, password, email, type, startLevel, currentLevel } = req.body;
   let hashedPassword = await bcrypt.hash(password, BCRYPT_WORK_FACTOR);
 
