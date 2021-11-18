@@ -78,7 +78,7 @@ function joinToJson(results) {
 //GET ALL teachers from /teachers
 router.get('/', async function(req, res, next){
     try{
-      let response = await db("SELECT * FROM teachers;");
+      let response = await db("SELECT t.*, u.*, t.id AS teacherId, u.id AS userId FROM teachers as t LEFT JOIN users AS u on t.userID = u.id;");
       res.send(response.data);
     } catch(err) {
       res.status(500).send({ error: "Sorry. We are encountering technical difficulties."});
