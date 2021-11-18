@@ -1,29 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react"; 
+
 // import { View, Text } from 'react-native'
 
 function HomeView () {
-	let emptyForm = {
-		month: "month",
-		day: "day"
-	}
+let d = new Date();
+let month = d.getMonth();
+let day = d.getDate();
 
-	const [date, setDate] = useState(emptyForm);
-	const [triviaOfTheDay, setTriviaOfTheDay] = useState(null);
-	const [error, setError] = useState("");
-  
-	const handleChange = e => {
-		let {name, value} = e.target;
-		setDate(form => ({...form, [name]: value}))
-	}
-	
-	const handleSubmit = e => {
-		e.preventDefault();
-		getTrivia(date);
-		setDate(emptyForm);
-	  };
+const [triviaOfTheDay, setTriviaOfTheDay] = useState(null);
+const [error, setError] = useState("");
 	
 	const getTrivia = () => {
-		fetch(`https://numbersapi.p.rapidapi.com/${date.month}/${date.day}/date?fragment=true&json=true`, {
+		fetch(`https://numbersapi.p.rapidapi.com/${month}/${day}/date?fragment=true&json=true`, {
 			"method": "GET",
 			"headers": {
 				"x-rapidapi-host": "numbersapi.p.rapidapi.com",
@@ -31,47 +19,29 @@ function HomeView () {
 			}
 		})	
 	.then(response => response.json())
-	.then(data => {
-	  setTriviaOfTheDay(data);
-	})
+	.then(data => {setTriviaOfTheDay(data)})
 	.catch(e => {
 	  setError(
-		"Sorry. The word of the day is unavailable for the date that you entered."
+		"We are sad to say that we do not have today's trivia as of the moment. Please check back later."
 	  );
 	});
   return triviaOfTheDay;
 };
 
+useEffect(() => {
+    getTrivia();
+	console.log(triviaOfTheDay);
+  }, []);
+
     return (
         <div>
             <h2>Hello!</h2>
 			<h3> Learn English through trivia. </h3>
-			<p> Enter a date in numbers. </p>
-			<form onSubmit={handleSubmit}>        
-				<input type="number"
-          				name="month"
-						min = "1"
-						max = "12"  
-						value={date.month}
-          				onChange={handleChange}
-          				>
-				</input>
-				<input type="number"
-          				name="day"
-						min = "1"
-						max = "31"
-						value={date.day}
-          				onChange={handleChange}
-          				>
-				</input>
-				<button type="submit">Submit</button>
-			</form>
-			<div>  {triviaOfTheDay ? (
+			 <div> 
+			{triviaOfTheDay?
           	<p> On this day, in {triviaOfTheDay.year} : {triviaOfTheDay.text} </p>
-        	) : (
-          		<p> {error} </p>
-        	)}
-			</div>
+			: <p> error </p>}
+			 </div>		
         </div>
     )
 }
