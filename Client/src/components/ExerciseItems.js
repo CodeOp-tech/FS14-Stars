@@ -33,12 +33,13 @@ function ExerciseItems(props){
 
   // Compute the score and POST it to the server
   async function postScore() {
-    let score = 0;
+    let correct = 0;
     for (let item of exercise.items) {
       if (item.answer === guesses[item.id]) {
-        score += 10;
+        correct++;
       }
     }
+    let score = Math.round(correct / exercise.items.length * 100);
     setScore(score);
     Api.postScore(Local.getUserId(), exercise.id, score);
   }
