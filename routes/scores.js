@@ -20,15 +20,22 @@ router.get('/', async function(req, res, next){
 
 
 // ADD (POST) NEW SCORE   
-router.post('/', async function(req,res,next){
-    let { studentID, exerciseID, score } = req.body;
+router.post('/', async function(req, res, next){
+    let { userId, exerciseId, score } = req.body;
+    console.log('POST scores:', req.body);
     
     try{
-        let sql = 
+        // First get student ID from user ID
+        let results = await db(`SELECT id FROM students WHERE userID = ${userId}`);
+        let studentId = results.data[0].id;
+        console.log('studentId', studentId);
+
+        // Now insert score
+        sql = 
           `INSERT INTO scores (studentID, exerciseID, score)  
-          VALUES (${studentID}, ${exerciseID}, ${score});`;
+          VALUES (${studentId}, ${exerciseId}, ${score});`;
         await db(sql);
-        let results = await db("SELECT * FROM scores;");
+        results = await db("SELECT * FROM scores;");
         res.send(results.data);
       } catch(err) {
         res.status(500).send({ error: err.message});

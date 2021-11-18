@@ -8,7 +8,7 @@ import ExerciseList from '../components/ExerciseList';
 function DeniseBView () {
     return (
         <div>
-            <StudentScores userId={3} />
+            <StudentScores />
 
             <ExerciseList />
         </div>
