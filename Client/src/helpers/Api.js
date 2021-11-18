@@ -60,6 +60,104 @@ class Api {
     }
 
     /**
+     * Get all exercises
+     **/
+
+     static async getExercises() {
+        // Prepare URL and options
+        let url = '/exercises';
+        let options = { method: 'GET', headers: {} };
+
+        // Add JWT token (if it exists)
+        let token = Local.getToken();
+        if (token) {
+            options.headers['Authorization'] = 'Bearer ' + token;
+        }
+
+        // Fetch!
+        let response;
+        try {
+            response = await fetch(url, options);
+            if (response.ok) {
+                response.data = await response.json();
+            } else {
+                response.error = `Error ${response.status}: ${response.statusText}`;
+            }
+        } catch (err) {
+            response = { ok: false, error: err.message };
+        }
+
+        return response;
+    }
+
+    /**
+     * Get all scores for a student 
+     **/
+
+     static async getScores(userId) {
+        // Prepare URL and options
+        let url = `/students/${userId}/scores`;
+        let options = { method: 'GET', headers: {} };
+
+        // Add JWT token (if it exists)
+        let token = Local.getToken();
+        if (token) {
+            options.headers['Authorization'] = 'Bearer ' + token;
+        }
+
+        // Fetch!
+        let response;
+        try {
+            response = await fetch(url, options);
+            if (response.ok) {
+                response.data = await response.json();
+            } else {
+                response.error = `Error ${response.status}: ${response.statusText}`;
+            }
+        } catch (err) {
+            response = { ok: false, error: err.message };
+        }
+
+        return response;
+    }
+
+    /**
+     * Post a new test score
+     **/
+
+     static async postScore(userId, exerciseId, score) {
+        // Prepare URL and options
+        let url = `/scores`;
+        let newScore = { userId, exerciseId, score };
+        let options = { 
+            method: 'POST', 
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(newScore)
+        };
+
+        // Add JWT token (if it exists)
+        let token = Local.getToken();
+        if (token) {
+            options.headers['Authorization'] = 'Bearer ' + token;
+        }
+
+        // Fetch!
+        let response;
+        try {
+            response = await fetch(url, options);
+            if (response.ok) {
+                response.data = await response.json();
+            } else {
+                response.error = `Error ${response.status}: ${response.statusText}`;
+            }
+        } catch (err) {
+            response = { ok: false, error: err.message };
+        }
+
+        return response;
+    }
+
+    /**
      * Get data for user with ID 'userId'
      */
 
