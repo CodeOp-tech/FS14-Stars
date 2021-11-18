@@ -67,7 +67,7 @@ function HomeView () {
 				<button type="submit">Submit</button>
 			</form>
 			<div>  {triviaOfTheDay ? (
-          	<p> On this day: {triviaOfTheDay.text} </p>
+          	<p> On this day, in {triviaOfTheDay.year} : {triviaOfTheDay.text} </p>
         	) : (
           		<p> {error} </p>
         	)}
