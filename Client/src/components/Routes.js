@@ -8,7 +8,7 @@ import Exercises from '../views/Exercises';
 import ExerciseItems from './ExerciseItems';
 import LogInView from '../views/LogInView';
 import ExerciseList from './ExerciseList';
-import StudentsProfile from '../views/StudentsProfile';
+import StudentProfile from '../components/StudentProfile';
 import TeachersList from '../views/TeachersList';
 
 function Routes(props) {
@@ -48,8 +48,8 @@ return (
                </Route>
 
              
-               <Route path="/studentsprofile">
-                    <StudentsProfile />
+               <Route path="/studentprofile">
+                    <StudentProfile />
                </Route>
 
                <Route path="/teacherslist">
