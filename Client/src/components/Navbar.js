@@ -8,17 +8,14 @@ function Navbar(props) {
               <ul className="ulNav">
                    {/* Maybe left align? */}
                    <li><NavLink to="/" exact>Home</NavLink></li>
-                   <li><NavLink to="/signupform">Signup Form</NavLink></li>
+                   <li><NavLink to="/signup">Signup</NavLink></li>
                    <li><NavLink to="/login"> Log In </NavLink></li>
                </ul>    
                    {
                         props.user && (
                          <ul className="ulNav">    
-                         <li><NavLink to="/denisebview">DeniseB View</NavLink></li>
-                         <li><NavLink to="/ingabview">IngaB View</NavLink></li>
-                         <li><NavLink to="/rebeccagview">RebeccaG View</NavLink></li>
-                         <li><NavLink to="/exerciselist">Exercise List</NavLink></li>
-                         <li><NavLink to="/userslist">Users List</NavLink></li>
+                         <li><NavLink to="/exercises">Exercises</NavLink></li>
+                         <li><NavLink to="/studentsprofile">Student Profile</NavLink></li>
                          <li><NavLink to="/teacherslist">Teachers List</NavLink></li>
                          </ul>
                         )

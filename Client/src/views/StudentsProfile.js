@@ -1,16 +1,17 @@
 import React from 'react'
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
+import StudentScores from '../components/StudentScores';
 
 
-function UsersList() {
+function StudentsProfile() {
    let [users, setUsers] = useState([]);
     const history = useHistory();
     useEffect(() => {
       getUsers("users");
      }, []);
     const getUsers = () => {
-        fetch('/users')
+        fetch("/students")
           .then(response => response.json())
           .then(users => {
             console.log(users);
@@ -25,11 +26,12 @@ function UsersList() {
                 {
                 users.map((users) => (
                     <ul key={users.id}>
-                       {users.username}, {users.type}
+                       {users.username}{users.type}
                     </ul>
                 ))
                 }
+                <StudentScores />
         </div>
     )
 }
-export default UsersList;
+export default StudentsProfile;

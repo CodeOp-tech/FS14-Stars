@@ -25,20 +25,20 @@ function App() {
     } else {
         setLoginErrorMsg('Login failed');
     }
-}
+  }
 
-//logs out user by "forgetting" the token
-function doLogout() {
+ //logs out user by "forgetting" the token
+ function doLogout() {
   Local.removeUserInfo();
   setUser(null);
   history.push('/');
-}
+ }
   
     // useEffect(() => {
     //   getUsers("students");
     //  }, []);
 
-function addUser(newVisitor) {
+ function addUser(newUser) {
   // add new user to database
   fetch('/teachme', {
     method: "POST",
@@ -53,9 +53,25 @@ function addUser(newVisitor) {
     })
     // Redirect to /users
     history.push('/teachme');
-}
+ }
+//  // last edit
+//  function addStudent(newStudent) {
+//   // add new user to database
+//   fetch('/students', {
+//     method: "POST",
+//     headers: {
+//       "Content-Type": "application/json",
+//       },
+//     body: JSON.stringify(students),
+//   })
+//     .then(response => response.json())
+//     .then(students => {
+//       setStudents(students);
+//     })
+//     // Redirect to /students
+//     history.push('/students');
 
-const getUsers = () => {
+ const getUsers = () => {
   fetch('/students')
     .then(response => response.json())
     .then(users => {
@@ -81,7 +97,6 @@ const getUsers = () => {
 }
 
 export default App;
-
 
 
 
