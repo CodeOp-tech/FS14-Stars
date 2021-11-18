@@ -29,7 +29,6 @@ CREATE TABLE teachers (
 -- creates STUDENTS table with the following specifications
 CREATE TABLE students (
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    startLevel VARCHAR(100),
     currentLevel VARCHAR(100),
     userID INT,
     FOREIGN KEY (userID) REFERENCES users(id) ON DELETE CASCADE
@@ -81,9 +80,9 @@ INSERT INTO teachers (qualifications, experience, userID)
            ('CELTA, PGCEi', 10, 2);
 
 -- initial STUDENTS table
-INSERT INTO students (startLevel, currentLevel, userID)
-    VALUES ('Beginner', 'Beginner', 3),
-           ('Intermediate', 'Advanced', 4);
+INSERT INTO students (currentLevel, userID)
+    VALUES ('Beginner', 3),
+           ('Advanced', 4);
            
 
 

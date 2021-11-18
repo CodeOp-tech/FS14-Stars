@@ -57,7 +57,6 @@ function joinToJsonStudent(results) {
   // Create student object
   let student = {
       id: row0.studentId,
-      startLevel: row0.startLevel,
       currentLevel: row0.currentLevel,
       userID: row0.userID,
       user,
@@ -184,8 +183,8 @@ router.post('/', async function(req, res) {
       let newUserID = results.data[0].insertId;
 
       let sql2 = `
-          INSERT INTO students (startLevel, currentLevel, userID)
-          VALUES ('${startLevel}', '${currentLevel}', ${newUserID});
+          INSERT INTO students (currentLevel, userID)
+          VALUES ('${currentLevel}', ${newUserID});
         `;
           await db(sql2);
 
