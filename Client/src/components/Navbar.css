@@ -30,16 +30,4 @@
   background-color: rgb(8, 99, 148);
 } */
 
-.Navbar li {
-  float: left;
-}
-.Navbar li a {
-  display: block;
-  color: white;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-}
-.Navbar li a:hover {
-  background-color: rgb(126, 223, 250);
-}
+

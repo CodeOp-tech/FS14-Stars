@@ -132,9 +132,10 @@ return (
                exercise && exercise.items.map(item => (
                     <li className="mr-2" key={item.id}>{buildSentence(item)}</li>
                     
+                    
                 ))
             }
-            </ol>
+            </ol> 
            
           <button type="submit" className="btn btn-primary">Get Answers</button>
         </form>

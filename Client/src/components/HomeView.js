@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react"; 
+import whello from './whello.jpg'
+
 
 // import { View, Text } from 'react-native'
 
@@ -34,12 +36,15 @@ useEffect(() => {
   }, []);
 
     return (
-        <div>
-            <h2>Hello!</h2>
-			<h3> Learn English through trivia. </h3>
-			 <div> 
+        <div className="logo">
+		
+			<h5 style={{ padding: "2rem", textAlign: "center", color:"teal"}}>Complete exercises - Find a tutor - Have fun learning</h5>
+			<img src={whello} width="90%"/>
+			<h3 style={{ padding: "1rem", textAlign: "center",color:"teal"}}> Learn English through trivia. </h3>
+			
+			 <div style={{textAlign: "center"}}> 
 			{triviaOfTheDay?
-          	<p> On this day, in {triviaOfTheDay.year} : {triviaOfTheDay.text} </p>
+          	<p> On this day, in {triviaOfTheDay.year} : {triviaOfTheDay.text}</p>
 			: <p> error </p>}
 			 </div>		
         </div>

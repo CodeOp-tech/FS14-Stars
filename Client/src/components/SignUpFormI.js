@@ -107,7 +107,7 @@ let emptyForm = {
                     <input type="radio" onClick={handleTypeClick} className="radio" name="type" id="radioTypeInput" value="teacher"/>
             </label>
             <label className="radio-wrapper" data-name="mobile">
-                    <h4 className="checkbox-title">I am a Student...</h4>
+                    <h4 className="checkbox-title" style={{ paddingTop:'50px'}}>I am a Student...</h4>
                     <input type="radio" onClick={handleTypeClick} className="radio" name="type" id="radioTypeInput" value="student"/>
             </label>
         </div>
