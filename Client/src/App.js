@@ -9,7 +9,6 @@
 
 function App() {
   const [user, setUser] = useState(Local.getUser());
-  let [users, setUsers] = useState([]);
   const [loginErrorMsg, setLoginErrorMsg] = useState('');
   const history = useHistory();
 
@@ -34,63 +33,13 @@ function App() {
   history.push('/');
  }
   
-    // useEffect(() => {
-    //   getUsers("students");
-    //  }, []);
-
- function addUser(newUser) {
-  // add new user to database
-  fetch('/teachme', {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      },
-    body: JSON.stringify(users),
-  })
-    .then(response => response.json())
-    .then(users => {
-      setUsers(users);
-    })
-    // Redirect to /users
-    history.push('/teachme');
- }
-//  // last edit
-//  function addStudent(newStudent) {
-//   // add new user to database
-//   fetch('/students', {
-//     method: "POST",
-//     headers: {
-//       "Content-Type": "application/json",
-//       },
-//     body: JSON.stringify(students),
-//   })
-//     .then(response => response.json())
-//     .then(students => {
-//       setStudents(students);
-//     })
-//     // Redirect to /students
-//     history.push('/students');
-
- const getUsers = () => {
-  fetch('/students')
-    .then(response => response.json())
-    .then(users => {
-      console.log(users);
-      setUsers(users);
-    })
-    .catch(error => {
-      console.log(error);
-    });
-  }
-
   return (
       <div className="App">
         <h1>Teach Me</h1>
 
           <Navbar user={user} logoutCb={doLogout}/>
           <Routes loginCb={(u, p) => doLogin(u, p)}
-                  loginError={loginErrorMsg}
-                  users={users} addUserCb={name => addUser(name)} />
+                  loginError={loginErrorMsg} />
     
       </div>
       )
