@@ -30,3 +30,6 @@ The authorization to view some pages is dependent on the user type.
 
 ### Exercises
 A list of exercises have been created for the students to answer. Upon submission, the exercises are marked and a score will be recorded in the student's profile page. 
+
+### External API
+We used an external API: Numbers from RapidApi to display a historical fact for the day as a short reading comprehension practice for anonymous users. 
