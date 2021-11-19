@@ -61,9 +61,9 @@ const showFunction = (showAnswer) => {
 
 function buildAnswer(item){
     if (item.answer === guesses[item.id]){
-      return "Correct!"
+      return <span style={{color: "green"}}> Correct! </span>
     } else {
-      return `Answer: ${item.answer}`
+      return <span style={{color: "red"}}> {`Answer: ${item.answer}`} </span>
     }
 }
 
@@ -93,7 +93,7 @@ function buildSentence(item) {
             {parts[1]}
             </td>
             <td>
-            <div className="showAnswer">
+            <div className="showAnswer ms-4">
               
           {
             showAnswer && buildAnswer(item)
