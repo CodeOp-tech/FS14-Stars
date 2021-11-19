@@ -73,7 +73,7 @@ let emptyForm = {
      <div className="AddNewUser">
       <h2>New Account Registration</h2>
       <Form onSubmit={handleSubmit}>
-          <Form.Group className="mb-3" controlId="formGroupUsername" 
+          <Form.Group className="mx-auto" controlId="formGroupUsername" 
            
           style={{ width: '30%', height: '100%' }}>
           <Form.Label>User name</Form.Label>
@@ -83,7 +83,7 @@ let emptyForm = {
           placeholder="Insert your name..." />
           </Form.Group>
 
-          <Form.Group className="mb-3" controlId="formGroupEmail" 
+          <Form.Group className="mx-auto" controlId="formGroupEmail" 
           style={{ width: '30%', height: '100%' }}>
           <Form.Label>Email address</Form.Label>
           <Form.Control type="email" 
@@ -92,7 +92,7 @@ let emptyForm = {
           placeholder="Enter email" />
           </Form.Group>
 
-          <Form.Group className="mb-3" controlId="formGroupPassword" 
+          <Form.Group className="mx-auto" controlId="formGroupPassword" 
           style={{ width: '30%', height: '100%' }}>
           <Form.Label>Password</Form.Label>
           <Form.Control type="password" 
@@ -114,7 +114,7 @@ let emptyForm = {
       { formData.userType === "teacher" && (
         <div className="">
             
-          <Form.Group className="mb-3" controlId="formGroupQualifications" 
+          <Form.Group className="mx-auto" controlId="formGroupQualifications" 
            
           style={{ width: '30%', height: '100%' }}>
           <Form.Label>Qualifications</Form.Label>
@@ -124,7 +124,7 @@ let emptyForm = {
           placeholder="Your qualifications..." />
           </Form.Group>
 
-          <Form.Group className="mb-3" controlId="formGroupExperience" 
+          <Form.Group className="mx-auto" controlId="formGroupExperience" 
            
           style={{ width: '30%', height: '100%' }}>
           <Form.Label>Experience</Form.Label>
@@ -138,7 +138,7 @@ let emptyForm = {
       { formData.userType === "student" && (
         <div className="">  
           <div>
-              <Form.Select aria-label="Default select example"onChange={handleChange} name="currentLevel" value={formData.currentLevel} 
+              <Form.Select className="mx-auto" aria-label="Default select example"onChange={handleChange} name="currentLevel" value={formData.currentLevel} 
                 style={{ width: '30%', height: '100%' }}>
                 <option value="beginner">Beginner</option>
                 <option value="intermediate">Intermediate</option>
