@@ -109,12 +109,12 @@ router.get('/:userId', ensureTeacher, ensureSameUser, async function(req, res) {
 
 // POST A TEACHER (REGISTER A NEW TEACHER)
 router.post('/', async function(req, res) {
-  let { username, password, email, type, qualifications, experience } = req.body;
+  let { username, password, email, userType, qualifications, experience } = req.body;
   let hashedPassword = await bcrypt.hash(password, BCRYPT_WORK_FACTOR);
 
   let sql = `
       INSERT INTO users (username, password, email, type)
-      VALUES ('${username}', '${hashedPassword}', '${email}', '${type}');
+      VALUES ('${username}', '${hashedPassword}', '${email}', '${userType}');
       SELECT LAST_INSERT_ID();
   `;
 
