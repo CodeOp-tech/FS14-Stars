@@ -168,12 +168,12 @@ router.get('/:userId/scores', ensureStudent, ensureSameUser, ensureStudentExists
 // POST a new student
 router.post('/', async function(req, res) {
   console.log(req.body)
-  let { username, password, email, type, startLevel, currentLevel } = req.body;
+  let { username, password, email, userType, currentLevel } = req.body;
   let hashedPassword = await bcrypt.hash(password, BCRYPT_WORK_FACTOR);
 
   let sql = `
       INSERT INTO users (username, password, email, type)
-      VALUES ('${username}', '${hashedPassword}', '${email}', '${type}');
+      VALUES ('${username}', '${hashedPassword}', '${email}', '${userType}');
       SELECT LAST_INSERT_ID();
   `;
 
