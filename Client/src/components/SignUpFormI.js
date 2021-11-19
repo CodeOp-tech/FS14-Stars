@@ -9,7 +9,7 @@ let emptyForm = {
   email: "",
   experience: "",
   qualifications: "",
-  currentLevel: "",
+  currentLevel: "beginner",
 };
   function SignUpFormI(props) {
   const [formData, setFormData] = useState(emptyForm);
