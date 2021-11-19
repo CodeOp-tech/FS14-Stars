@@ -85,7 +85,7 @@ function App() {
 
   return (
       <div className="App">
-        <h1>Teach Me</h1>
+        <h6>Improve your English</h6>
 
           <Navbar user={user} logoutCb={doLogout}/>
           <Routes loginCb={(u, p) => doLogin(u, p)}
