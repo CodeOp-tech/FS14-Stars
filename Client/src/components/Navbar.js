@@ -10,6 +10,9 @@ function Navbar(props) {
                    <li><NavLink to="/" exact>Home</NavLink></li>
                    <li><NavLink to="/signup">Signup</NavLink></li>
                    <li><NavLink to="/login"> Log In </NavLink></li>
+                   <li className="nav-item">
+                         <span className="nav-link" style={{ cursor: 'pointer' }} onClick={props.logoutCb}>Logout</span>
+                             </li>
                </ul>    
                    {
                         props.user && (
@@ -26,13 +29,10 @@ function Navbar(props) {
                         
                         (
                          <ul className="navbar-nav">
-                             <li className="nav-item">
+                             {/* <li className="nav-item">
                                  <NavLink className="nav-link" activeClassName="active" to={`/users/${props.user.id}`}>Profile ({props.user.username})</NavLink>
-                             </li>
-                             <li className="nav-item">
-                                 {/* Simulate <NavLink> (it requires 'to' attribute, but we don't have one) */}
-                                 <span className="nav-link" style={{ cursor: 'pointer' }} onClick={props.logoutCb}>Logout</span>
-                             </li>
+                             </li> */}
+                             
                          </ul>
                         )
                    :    
