@@ -78,7 +78,7 @@ function joinToJson(results) {
 //GET ALL teachers from /teachers
 router.get('/', async function(req, res, next){
     try{
-      let response = await db("SELECT * FROM teachers;");
+      let response = await db("SELECT t.*, u.*, t.id AS teacherId, u.id AS userId FROM teachers as t LEFT JOIN users AS u on t.userID = u.id;");
       res.send(response.data);
     } catch(err) {
       res.status(500).send({ error: "Sorry. We are encountering technical difficulties."});
@@ -109,12 +109,12 @@ router.get('/:userId', ensureTeacher, ensureSameUser, async function(req, res) {
 
 // POST A TEACHER (REGISTER A NEW TEACHER)
 router.post('/', async function(req, res) {
-  let { username, password, email, type, qualifications, experience } = req.body;
+  let { username, password, email, userType, qualifications, experience } = req.body;
   let hashedPassword = await bcrypt.hash(password, BCRYPT_WORK_FACTOR);
 
   let sql = `
       INSERT INTO users (username, password, email, type)
-      VALUES ('${username}', '${hashedPassword}', '${email}', '${type}');
+      VALUES ('${username}', '${hashedPassword}', '${email}', '${userType}');
       SELECT LAST_INSERT_ID();
   `;
 

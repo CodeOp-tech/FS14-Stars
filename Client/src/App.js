@@ -9,7 +9,6 @@
 
 function App() {
   const [user, setUser] = useState(Local.getUser());
-  let [users, setUsers] = useState([]);
   const [loginErrorMsg, setLoginErrorMsg] = useState('');
   const history = useHistory();
 
@@ -25,63 +24,28 @@ function App() {
     } else {
         setLoginErrorMsg('Login failed');
     }
-}
+  }
 
-//logs out user by "forgetting" the token
-function doLogout() {
+ //logs out user by "forgetting" the token
+ function doLogout() {
   Local.removeUserInfo();
   setUser(null);
   history.push('/');
-}
+ }
   
-    // useEffect(() => {
-    //   getUsers("students");
-    //  }, []);
-
-function addUser(newVisitor) {
-  // add new user to database
-  fetch('/teachme', {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      },
-    body: JSON.stringify(users),
-  })
-    .then(response => response.json())
-    .then(users => {
-      setUsers(users);
-    })
-    // Redirect to /users
-    history.push('/teachme');
-}
-
-const getUsers = () => {
-  fetch('/students')
-    .then(response => response.json())
-    .then(users => {
-      console.log(users);
-      setUsers(users);
-    })
-    .catch(error => {
-      console.log(error);
-    });
-  }
-
   return (
       <div className="App">
-        <h1>Teach Me</h1>
+        <h6>Improve your English</h6>
 
           <Navbar user={user} logoutCb={doLogout}/>
           <Routes loginCb={(u, p) => doLogin(u, p)}
-                  loginError={loginErrorMsg}
-                  users={users} addUserCb={name => addUser(name)} />
+                  loginError={loginErrorMsg} />
     
       </div>
       )
 }
 
 export default App;
-
 
 
 

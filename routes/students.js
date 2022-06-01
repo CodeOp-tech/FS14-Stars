@@ -57,7 +57,6 @@ function joinToJsonStudent(results) {
   // Create student object
   let student = {
       id: row0.studentId,
-      startLevel: row0.startLevel,
       currentLevel: row0.currentLevel,
       userID: row0.userID,
       user,
@@ -108,7 +107,8 @@ function joinToJsonCompleted(results) {
 //GET ALL students from /students
 router.get('/', async function(req, res, next){
     try{
-      let response = await db("SELECT * FROM students;");
+      let response = await db(
+        "SELECT st.*, u.*, st.id AS studentId, u.id AS userId FROM students AS st LEFT JOIN users AS u ON st.userID = u.id;");
       res.send(response.data);
     } catch(err) {
       res.status(500).send({ error: "Sorry. We are encountering technical difficulties."});
@@ -167,12 +167,13 @@ router.get('/:userId/scores', ensureStudent, ensureSameUser, ensureStudentExists
 
 // POST a new student
 router.post('/', async function(req, res) {
-  let { username, password, email, type, startLevel, currentLevel } = req.body;
+  console.log(req.body)
+  let { username, password, email, userType, currentLevel } = req.body;
   let hashedPassword = await bcrypt.hash(password, BCRYPT_WORK_FACTOR);
 
   let sql = `
       INSERT INTO users (username, password, email, type)
-      VALUES ('${username}', '${hashedPassword}', '${email}', '${type}');
+      VALUES ('${username}', '${hashedPassword}', '${email}', '${userType}');
       SELECT LAST_INSERT_ID();
   `;
 
@@ -184,8 +185,8 @@ router.post('/', async function(req, res) {
       let newUserID = results.data[0].insertId;
 
       let sql2 = `
-          INSERT INTO students (startLevel, currentLevel, userID)
-          VALUES ('${startLevel}', '${currentLevel}', ${newUserID});
+          INSERT INTO students (currentLevel, userID)
+          VALUES ('${currentLevel}', ${newUserID});
         `;
           await db(sql2);
 

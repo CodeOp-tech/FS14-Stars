@@ -1,18 +1,19 @@
 import React from 'react'
 import StudentScores from '../components/StudentScores';
 import ExerciseList from '../components/ExerciseList';
+import StudentProfile from '../components/StudentProfile';
 
 
-
-
-function DeniseBView () {
+function Exercises () {
     return (
         <div>
-            <StudentScores userId={3} />
+            <StudentScores />
+
+            <StudentProfile />
 
             <ExerciseList />
         </div>
     )
 }
 
-export default DeniseBView;
+export default Exercises;

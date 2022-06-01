@@ -29,7 +29,7 @@ function LogInView(props) {
             <form className="login-form" onSubmit={handleSubmit}>
 
                 <h3>Log in</h3>
-
+                <br/>
                 {
                     props.loginError && (
                         <div className="alert alert-danger">{props.loginError}</div>
@@ -38,6 +38,7 @@ function LogInView(props) {
 
                 <div className="form-group">
                     <label>Username</label>
+                    <br/>
                     <input type="text" name="usernameInput" required className="form-control" value={username} onChange={handleChange} placeholder="Enter username" />
                     
 
@@ -45,12 +46,12 @@ function LogInView(props) {
 
                 <div className="form-group">
                     <label>Password</label>
-                    <input type="password" className="form-control" placeholder="Enter password" />
+                    <input type="password" name="passwordInput" required className="form-control" onChange={handleChange} placeholder="Enter password" />
                 </div>
 
                 <div className="form-group">
                     <div className="custom-control custom-checkbox">
-                        <input type="checkbox" className="custom-control-input" id="customCheck1" />
+                        <input type="checkbox" name="usernameInput"className="custom-control-input" id="customCheck1" />
                         <label className="custom-control-label" htmlFor="customCheck1">Remember me</label>
                     </div>
                 </div>

@@ -34,7 +34,7 @@ function ExerciseList(props) {
                 {
                     exercises.length && exercises.map(e => (
                         <tr key={e.id}>
-                            <td><Link to={'/rebeccagview/'+e.id}>{e.title}</Link></td>
+                            <td><Link to={'/exercises/'+e.id}>{e.title}</Link></td>
                             <td>{e.category}</td>
                             <td>{e.level}</td>
                         </tr>

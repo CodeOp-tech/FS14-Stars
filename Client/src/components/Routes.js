@@ -4,12 +4,11 @@ import { Route, Switch } from 'react-router-dom';
 
 import HomeView from '../components/HomeView';
 import SignUpFormI from './SignUpFormI';
-import DeniseBView from '../views/DeniseBView';
-import IngaBView from '../views/IngaBView';
-import RebeccaGView from '../views/RebeccaGView';
+import Exercises from '../views/Exercises';
+import ExerciseItems from './ExerciseItems';
 import LogInView from '../views/LogInView';
-import ExerciseList from '../views/ExerciseList';
-import UsersList from '../views/UsersList';
+import ExerciseList from './ExerciseList';
+import StudentsProfile from '../views/StudentsProfile';
 import TeachersList from '../views/TeachersList';
 
 function Routes(props) {
@@ -27,22 +26,17 @@ return (
                     <SignUpFormI  />
                </Route>
                 
-                {/* DeniseB View */}
-               <Route path="/denisebview">
-                    <DeniseBView />
-               </Route>
-
-                {/* IngaB View */}
+               {/* IngaB View
                <Route path="/ingabview">
                     <IngaBView submitCb = {InitialUsers => props.submitCb(InitialUsers)}/>
-               </Route>
+               </Route> */}
 
                {/* RebeccaG View / Exercise View */}
-               <Route path="/rebeccagview/:id">
-                    <RebeccaGView />
+               <Route path="/exercises/:id">
+                    <ExerciseItems/>
                </Route>
-               <Route path="/rebeccagview">
-                    <RebeccaGView />
+               <Route path="/exercises">
+                    <ExerciseList />
                </Route>
 
                {/* Changed to LogInView */}
@@ -53,13 +47,9 @@ return (
                 />
                </Route>
 
-               {/* Exercise List */}
-               <Route path="/exerciselist">
-                    <ExerciseList />
-               </Route>
-
-               <Route path="/userslist">
-                    <UsersList />
+             
+               <Route path="/studentprofile">
+                    <StudentsProfile />
                </Route>
 
                <Route path="/teacherslist">
